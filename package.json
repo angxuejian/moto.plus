@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "lib-flexible": "^0.3.2",
+    "nprogress": "^0.2.0",
+    "resize-observer-polyfill": "^1.5.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
@@ -26,8 +29,8 @@
     "@vue/test-utils": "^2.0.0-0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.0.0",
+    "postcss-plugin-px2rem": "^0.8.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "typescript": "~3.9.3",
