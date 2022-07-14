@@ -1,18 +1,32 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
+    <div class="title">Moto.plus</div>
+    <button @click="switchBtn">switch</button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
-  }
+  data() {
+    return {
+      isDark: false,
+    }
+  },
+  methods: {
+    switchBtn: function() {
+      this.$store.dispatch('CHANGE_THEME')
+    },
+  },
 };
 </script>
+
+<style lang="scss">
+.title {
+  color: var(--text-color);
+  font-size: 20px;
+}
+</style>
