@@ -1,5 +1,9 @@
 
-/* 白色 */
+/* 白色 - LIGHT */
 :root {
-  --text-color: red
+  --mo-text-primary-color: #222222;   /* 白色 - 主色 */
+  --mo-text-regular-color: #2D2D2D;   /* 一级辅助色  */
+  --mo-text-secondary-color: #B2B2B2; /* 二级辅助色  */
+
+  --mo-bg-color: #FFFFFF
 }

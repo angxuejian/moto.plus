@@ -1,5 +1,9 @@
 
-/* 黑色 */
+/* 黑色 - DARK */
 :root[theme='dark'] {
-  --text-color: blue
+  --mo-text-primary-color: #F9F9F9;   /* 黑色 - 主色 */
+  --mo-text-regular-color: #E2E2E2;   /* 一级辅助色  */
+  --mo-text-secondary-color: #B9B9B9; /* 二级辅助色  */
+
+  --mo-bg-color: #141414
 }

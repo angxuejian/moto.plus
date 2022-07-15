@@ -2,7 +2,11 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-    <div class="title">Moto.plus</div>
+    <div class="title">
+      <span>Moto.plus</span>
+      <span>二级标题</span>
+      <span>三级标题</span>
+    </div>
     <button @click="switchBtn">switch</button>
   </div>
 </template>
@@ -26,7 +30,27 @@ export default {
 
 <style lang="scss">
 .title {
-  color: var(--text-color);
   font-size: 20px;
+  background-color: var(--mo-bg-color);
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  span {
+    &:nth-of-type(1) {
+      color: var(--logo-success-color);
+      font-weight: 600;
+      padding: 10px;
+      background-color: var(--logo-success-color-bg);
+    }
+    &:nth-of-type(2) {
+      color: var(--mo-text-regular-color)
+    }
+    &:nth-of-type(3) {
+      color: var(--mo-text-secondary-color)
+    }
+  }
 }
 </style>
