@@ -7,6 +7,10 @@
       <span>二级标题</span>
       <span>三级标题</span>
     </div>
+
+    <mo-scrollbar custom-class='items'>
+        <div v-for="(item, index) in 50" :key="index">{{ item }}</div>  
+    </mo-scrollbar>
     <button @click="switchBtn">switch</button>
   </div>
 </template>
@@ -52,5 +56,15 @@ export default {
       color: var(--mo-text-secondary-color)
     }
   }
+}
+
+.items {
+  width: 500PX;
+  height: 500PX;
+  // div {
+  //   margin-bottom: 50PX;
+  //   background-color: red;
+  //   color: #fff;
+  // }
 }
 </style>
