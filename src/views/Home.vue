@@ -1,15 +1,14 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
+    <div class="logo"></div> 
     <div class="title">
       <span>Moto.plus</span>
       <span>二级标题</span>
       <span>三级标题</span>
     </div>
 
-    <mo-scrollbar custom-class='items'>
-        <div v-for="(item, index) in 50" :key="index">{{ item }}</div>  
+    <mo-scrollbar class='items'>
+        <div class="item" v-for="(item, index) in 50" :key="index">{{ item }}</div>  
     </mo-scrollbar>
     <button @click="switchBtn">switch</button>
   </div>
@@ -22,6 +21,7 @@ export default {
   data() {
     return {
       isDark: false,
+      logo: '',
     }
   },
   methods: {
@@ -33,6 +33,12 @@ export default {
 </script>
 
 <style lang="scss">
+.logo {
+  width: 70px;
+  height: 70px;
+  background: var(--mo-logo) no-repeat;
+  background-size: 100% 100%;
+}
 .title {
   font-size: 20px;
   background-color: var(--mo-bg-color);
@@ -44,10 +50,10 @@ export default {
   justify-content: center;
   span {
     &:nth-of-type(1) {
-      color: var(--logo-success-color);
+      color: var(--logo-primary-color);
       font-weight: 600;
       padding: 10px;
-      background-color: var(--logo-success-color-bg);
+      background-color: var(--logo-primary-color-bg);
     }
     &:nth-of-type(2) {
       color: var(--mo-text-regular-color)
@@ -61,10 +67,8 @@ export default {
 .items {
   width: 500PX;
   height: 500PX;
-  // div {
-  //   margin-bottom: 50PX;
-  //   background-color: red;
-  //   color: #fff;
-  // }
+  .item {
+    color: var(--mo-text-primary-color)
+  }
 }
 </style>

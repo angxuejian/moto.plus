@@ -1,5 +1,5 @@
 <template>
-  <div :class="['mo-scrollbar', customClass]">
+  <div :class="['mo-scrollbar']">
     <div
       :style="wrapStyle"
       ref='wrap'
@@ -59,12 +59,6 @@ export default {
         return false
       },
     },
-    customClass: {
-      type: String,
-      default() {
-        return ''
-      },
-    },
   },
 
   setup(props) {
@@ -84,12 +78,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$hover-bar: rgba(0,0,0, 0.1);
-$hover-bc: #ededed;
+$hover-bar: var(--mo-text-hover-color);
+$hover-bc: var(--mo-bg-hover-color);
 %axis-bar {
   border-radius: 15px;
-  transition: background 0.3s;
-  background: transparent;
+  transition: background-color 0.3s;
+  background-color: transparent;
   position: absolute;
 }
 
@@ -97,16 +91,14 @@ $hover-bc: #ededed;
   overflow: hidden;
   position: relative;
   white-space: nowrap;
-  // width: 100%;
-  // height: 100%;
   &:hover,
   &:focus,
   &:active {
     .axis-hover {
-      background: $hover-bar;
+      background-color: $hover-bar;
     }
     .axis-bc-hover {
-      background: $hover-bc;
+      background-color: $hover-bc;
     }
   }
 
