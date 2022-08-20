@@ -1,6 +1,7 @@
-@import url('./light.css');
-@import url('./dark.css');
-
+@import url('./light.scss');
+@import url('./dark.scss');
+@import '../common/a.scss';
+@import '../common//screen.scss';
 
 :root { 
   --logo-primary-color: #438EDB; /* 主颜色 */
@@ -12,4 +13,9 @@
   --logo-success-color-bg: rgba(103, 194, 58, 0.1);
   --logo-warning-color-bg: rgba(230, 162, 60, 0.1);
   --logo-error-color-bg: rgba(245, 108, 10, 0.1);
+
+  --nav-z-index: 10;
+
+  --fs-logo: 12px;
+  /* --font-size-title:  */
 }

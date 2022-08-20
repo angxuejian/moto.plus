@@ -1,7 +1,7 @@
 module.exports = {
   pages: {
     index: {
-      title: 'Moto.plus',
+      title: 'Moto Plus',
       entry: 'src/main.js',
       template: 'public/index.html',
       filename: 'index.html',

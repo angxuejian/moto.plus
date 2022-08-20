@@ -1,7 +1,8 @@
 <template>
   <div class="home">
-    <div class="logo"></div> 
-    <div class="title">
+    2
+    <!-- <div class="logo"></div>  -->
+    <!-- <div class="title">
       <span>Moto.plus</span>
       <span>二级标题</span>
       <span>三级标题</span>
@@ -9,7 +10,7 @@
 
     <mo-scrollbar class='items'>
         <div class="item" v-for="(item, index) in 50" :key="index">{{ item }}</div>  
-    </mo-scrollbar>
+    </mo-scrollbar> -->
     <button @click="switchBtn">switch</button>
   </div>
 </template>
@@ -33,12 +34,7 @@ export default {
 </script>
 
 <style lang="scss">
-.logo {
-  width: 70px;
-  height: 70px;
-  background: var(--mo-logo) no-repeat;
-  background-size: 100% 100%;
-}
+
 .title {
   font-size: 20px;
   background-color: var(--mo-bg-color);
