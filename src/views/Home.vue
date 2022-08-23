@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    2
+    首页
     <!-- <div class="logo"></div>  -->
     <!-- <div class="title">
       <span>Moto.plus</span>
@@ -11,6 +11,7 @@
     <mo-scrollbar class='items'>
         <div class="item" v-for="(item, index) in 50" :key="index">{{ item }}</div>  
     </mo-scrollbar> -->
+    
     <button @click="switchBtn">switch</button>
   </div>
 </template>
