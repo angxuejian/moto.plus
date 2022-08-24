@@ -6,7 +6,10 @@
         <a class="logo remove-defult" href="#" alt='Moto Plus Logo'>
           <div></div><span>Moto Plus</span>
         </a>
+         <!-- <div>2</div> -->
+        <!-- <div style="background: red; width: 800px; text-align: center; color: #fff;">1</div> -->
 
+       
         <div class="header-wrapper">
           <router-link to="/component">组件</router-link>
 
@@ -16,6 +19,7 @@
             </svg>
           </a>
         </div>
+
       </div>
     </div>
     <div class="main">
@@ -55,6 +59,8 @@ html, body, #app {
       display: flex;
       align-items: center;
       text-decoration: none;
+      // width: 20%;
+      height: 100%;
       div {
         background: var(--mo-logo) no-repeat;
         background-size: 100% 100%;
@@ -70,7 +76,11 @@ html, body, #app {
 
     .header-wrapper {
 
-
+      // width: 20%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
       .mo-github {
         color: var(--mo-text-primary-color);
         width: 20PX;

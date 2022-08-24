@@ -4,10 +4,11 @@
     <sidebar />
 
     
-    <!-- <div class="view-wrapper">
-      这是中间的！
-      <router-view />
-    </div> -->
+    <div class="view">
+      <div class="view-wrapper">
+        <router-view />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,9 +29,20 @@ export default {
   justify-content: center;
   
 }
-.view-wrapper {
+.view {
   padding-top: var(--navbar-margin);
-  width: 80%;
-  background: #ededed;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: var(--sidebar-width);
+  background-color: var(--mo-bg-color);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  .view-wrapper {
+    width: 93%;
+    padding: 0 0 20PX 0;
+    box-sizing: border-box;
+    // background-color: #f5f5f5;
+  }
 }
 </style>

@@ -10,4 +10,12 @@
   .sidebar {
     transform: translateX(-100%) !important;
   }
+  .view {
+    padding-left: 0 !important;
+    justify-content: center !important;
+    .view-wrapper {
+      width: 90% !important;
+    }
+  }
+
 }

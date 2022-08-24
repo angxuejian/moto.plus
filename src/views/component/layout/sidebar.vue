@@ -20,7 +20,7 @@ export default {
   top: calc(var(--navbar-height) + 1PX);
   width: 27%;
   // background-color: var(--mo-bg-color);
-  background-color: #ededed;
+  // background-color: #ededed;
   height: 100%;
   color: var(--mo-text-primary-color);
   transform: translateX(0);
