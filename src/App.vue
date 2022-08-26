@@ -6,9 +6,6 @@
         <a class="logo remove-defult" href="#" alt='Moto Plus Logo'>
           <div></div><span>Moto Plus</span>
         </a>
-         <!-- <div>2</div> -->
-        <!-- <div style="background: red; width: 800px; text-align: center; color: #fff;">1</div> -->
-
        
         <div class="header-wrapper">
           <router-link to="/component">组件</router-link>
@@ -27,6 +24,20 @@
     </div>
   </div>
 </template>
+
+<script>
+// import { useRouter, onBeforeRouteUpdate } from 'vue-router';
+export default {
+  name: 'APP',
+
+  setup() {
+    
+    // onBeforeRouteUpdate((to) => {
+    //   console.log(to, '-->')
+    // })
+  },
+}
+</script>
 
 <style lang="scss">
 html, body, #app {

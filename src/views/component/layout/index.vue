@@ -2,22 +2,24 @@
   <div class="main-wrapper">
 
     <sidebar />
+    <menubar />
 
-    
     <div class="view">
       <div class="view-wrapper">
         <router-view />
       </div>
     </div>
+
   </div>
 </template>
 
 
 <script>
 import sidebar from './sidebar.vue'
+import menubar from './menubar.vue'
 export default {
   name: 'Layout',
-  components: { sidebar },
+  components: { sidebar, menubar },
 }
 </script>
 
@@ -40,9 +42,8 @@ export default {
   justify-content: flex-end;
   .view-wrapper {
     width: 93%;
-    padding: 0 0 20PX 0;
+    padding: 20PX 0 20PX 0;
     box-sizing: border-box;
-    // background-color: #f5f5f5;
   }
 }
 </style>

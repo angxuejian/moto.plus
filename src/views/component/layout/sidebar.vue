@@ -1,6 +1,5 @@
 <template>
   <div class="sidebar">
-
     <mo-scrollbar class="sidebar-wrapper">
       <div class="sidebar-item" style="margin-bottom: 20px" v-for="(item, index) in 50" :key='index'>{{ item }}</div>
     </mo-scrollbar>
@@ -17,10 +16,11 @@ export default {
 .sidebar {
   position: fixed;
   left: 0;
-  top: calc(var(--navbar-height) + 1PX);
+  top: 0;
   width: 27%;
-  // background-color: var(--mo-bg-color);
-  // background-color: #ededed;
+  z-index: var(--sid-z-index);
+  top: calc(var(--navbar-height) + 1PX);
+  background-color: var(--mo-bg-color);
   height: 100%;
   color: var(--mo-text-primary-color);
   transform: translateX(0);
