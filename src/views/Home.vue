@@ -47,10 +47,10 @@ export default {
   justify-content: center;
   span {
     &:nth-of-type(1) {
-      color: var(--logo-primary-color);
+      color: var(--primary-color);
       font-weight: 600;
       padding: 10px;
-      background-color: var(--logo-primary-color-bg);
+      background-color: var(--primary-color-bg);
     }
     &:nth-of-type(2) {
       color: var(--mo-text-regular-color)

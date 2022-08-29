@@ -4,15 +4,15 @@
 @import '../common//screen.scss';
 
 :root { 
-  --logo-primary-color: #438EDB; /* 主颜色 */
-  --logo-success-color: #67C23A; /* 成功 */
-  --logo-warning-color: #E6A23C; /* 警告 */
-  --logo-error-color: #F56C6C;   /* 错误 */
+  --primary-color: #438EDB; /* 主颜色 */
+  --success-color: #67C23A; /* 成功 */
+  --warning-color: #E6A23C; /* 警告 */
+  --error-color: #F56C6C;   /* 错误 */
 
-  --logo-primary-color-bg: rgba(64, 158, 255, 0.1);
-  --logo-success-color-bg: rgba(103, 194, 58, 0.1);
-  --logo-warning-color-bg: rgba(230, 162, 60, 0.1);
-  --logo-error-color-bg: rgba(245, 108, 10, 0.1);
+  --primary-color-bg: rgba(64, 158, 255, 0.1);
+  --success-color-bg: rgba(103, 194, 58, 0.1);
+  --warning-color-bg: rgba(230, 162, 60, 0.1);
+  --error-color-bg: rgba(245, 108, 10, 0.1);
 
   --nav-z-index: 10;
   --men-z-index: 11;

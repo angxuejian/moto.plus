@@ -8,7 +8,12 @@
         </a>
        
         <div class="header-wrapper">
-          <router-link to="/component">组件</router-link>
+          <!-- <router-link to="/component">组件</router-link> -->
+          <div class="sub-pages">
+            <router-link :class="['page-item', 'remove-defult', { 'page-item__selected': selectSubPageIndex === index }]" v-for="(item, index) in subPages" :key="index" :to="item.url">
+              <span @click="getSubPage(index)">{{ item.name }}</span>
+            </router-link>
+          </div>
 
           <a class="remove-defult" alt='angxuejian/moto.plus' href="https://github.com/angxuejian/moto.plus">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github mo-github" viewBox="0 0 16 16">
@@ -26,20 +31,28 @@
 </template>
 
 <script>
-// import { useRouter, onBeforeRouteUpdate } from 'vue-router';
+import { ref } from 'vue' 
 export default {
   name: 'APP',
 
   setup() {
+    const subPages = ref([
+      { name: '首页', url: '/' },
+      { name: '组件', url: '/component' },
+    ])
+    const selectSubPageIndex = ref(0)
+    const getSubPage = index => { selectSubPageIndex.value = index }
+
     
-    // onBeforeRouteUpdate((to) => {
-    //   console.log(to, '-->')
-    // })
+    return { subPages, selectSubPageIndex, getSubPage }
   },
 }
 </script>
 
 <style lang="scss">
+#nprogress .bar {
+  background: var(--primary-color) !important;
+}
 html, body, #app {
   width: 100%;
   height: 100%;
@@ -86,12 +99,37 @@ html, body, #app {
     }
 
     .header-wrapper {
-
-      // width: 20%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      .sub-pages {
+        height: 100%;
+        margin-right: 30px;
+        display: flex;
+        align-items: center;
+        .page-item {
+          height: 100%;
+          padding: 0 12PX;
+          display: inline-block;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-sizing: border-box;
+          border-bottom: 2px solid transparent;
+          span {
+            font-size: 10px;
+            color: var(--mo-text-primary-color);
+            &:hover {
+              color: var(--primary-color)
+            }
+          }
+        }
+        .page-item__selected {
+          box-sizing: border-box;
+          border-bottom-color: var(--primary-color);
+        }
+      }
       .mo-github {
         color: var(--mo-text-primary-color);
         width: 20PX;
