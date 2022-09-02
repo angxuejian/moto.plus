@@ -26,6 +26,9 @@ export default {
       logo: '',
     }
   },
+  created() {
+    // this.$store.dispatch('CHANGE_THEME')
+  },
   methods: {
     switchBtn: function() {
       this.$store.dispatch('CHANGE_THEME')

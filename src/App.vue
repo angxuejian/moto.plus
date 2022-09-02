@@ -13,8 +13,9 @@
               <span @click="getSubPage(index)">{{ item.name }}</span>
             </router-link>
           </div>
+          
           <div class="theme-switch">
-            <mo-switch @change="onCallbackSwitchChange" />
+            <mo-switch v-model="switchValue" theme @change='onCallbackSwitchChange' />
           </div>
           <a class="remove-defult" alt='angxuejian/moto.plus' href="https://github.com/angxuejian/moto.plus">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github mo-github" viewBox="0 0 16 16">
@@ -45,12 +46,8 @@ export default {
     ])
     const selectSubPageIndex = ref(0)
     const getSubPage = index => { selectSubPageIndex.value = index }
+    const onCallbackSwitchChange = () => { store.dispatch('CHANGE_THEME') }
 
-    const onCallbackSwitchChange = ({ value }) => {
-      console.log(value)
-      store.dispatch('CHANGE_THEME')
-    }
-    
     return { subPages, selectSubPageIndex, getSubPage, onCallbackSwitchChange }
   },
 }

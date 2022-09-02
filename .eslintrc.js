@@ -1,8 +1,10 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
+    jest: true
   },
+  
   extends: ['plugin:vue/vue3-essential', 'eslint:recommended'],
   parserOptions: {
     parser: 'babel-eslint'
@@ -26,7 +28,7 @@ module.exports = {
         '**/tests/unit/**/*.spec.{j,t}s?(x)'
       ],
       env: {
-        jest: true
+        jest: true,
       }
     }
   ]

@@ -1,10 +1,15 @@
 <template>
   <div class="mo-switch">
     <div 
-    @click="switchStatus" 
-    :class="['switch', { 'switch__checked' : checked }]
+    @click="switchStatus"
+    :class="{
+      'switch': !theme,
+      'switch__theme': theme,
+      'switch__checked': checked,
+      'switch__checked--color': !theme && checked
+    }
     ">
-      <div class="pointer">
+      <div v-if="theme" class="pointer">
         <img v-show="!checked" src="@/assets/light.png" alt="">
         <img v-show="checked" src="@/assets/dark.png" alt="">
       </div>
@@ -13,16 +18,40 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { computed, watch } from 'vue'
+import { useStore } from 'vuex'
 export default {
   name: 'MoSwitch',
-
+  props: {
+    theme: {
+      type: Boolean,
+      default: () => false,
+    },
+    modelValue: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
+  emits: ['update:modelValue', 'change'],
   setup(props, { emit }) {
-    const checked = ref(false)
+    const store = useStore()
+    const t = computed(() => store.state.theme)
+    const checked = computed({
+      get: () => {
+        return props.theme ? Boolean(t.value) : props.modelValue
+      },
+      set: (value) => {
+        emit('update:modelValue', value)
+      },
+    })
+
+
     const switchStatus = () => {
       checked.value = !checked.value
       emit('change', { value: checked.value })      
     }
+    watch(t, (newV) => { checked.value = Boolean(newV) })
+    
     return { checked, switchStatus }
   },
 }
@@ -30,7 +59,18 @@ export default {
 
 <style lang="scss" scoped>
 $color: var(--mo-text-light-color);
-.switch {
+%pointer {
+  position: absolute;
+  top: calc((100% - 16PX) / 2);
+  left: 1px;
+  width: 16PX;
+  height: 16PX;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 40%);
+  transition: all 0.3s;
+  transform: scale(1);
+}
+.switch, .switch__theme {
   width: 41PX;
   height: 21PX;
   background-color: $color;
@@ -44,7 +84,6 @@ $color: var(--mo-text-light-color);
   &:hover {
     border-color: var(--mo-text-hover-color) !important;
   }
-
   &::before {
     position: absolute;
     content: '';
@@ -56,50 +95,38 @@ $color: var(--mo-text-light-color);
     border-radius: 15PX;
     transition: all 0.3s;
   }
+}
 
-  // &::after {
-  //   position: absolute;
-  //   content: '';
-  //   top: calc((100% - 16PX) / 2);
-  //   left: 1px;
-  //   width: 16PX;
-  //   height: 16PX;
-  //   border-radius: 50%;
-  //   box-shadow: 0 1px 3px rgb(0 0 0 / 40%);
-  //   background-color: #fff;
-  //   transition: all 0.3s;
-  //   transform: scale(1);
-  // }
-
+.switch {
+  &::after {
+    content: '';
+    background-color: #FFFFFF;
+    @extend %pointer;
+  }
+}
+.switch__theme {
   .pointer {
-    position: absolute;
-    top: calc((100% - 16PX) / 2);
-    left: 1px;
-    width: 16PX;
-    height: 16PX;
-    border-radius: 50%;
-    box-shadow: 0 1px 3px rgb(0 0 0 / 40%);
-    background-color: var(--mo-bg-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s;
-    transform: scale(1);
+    background-color: var(--mo-bg-color);
+    @extend %pointer;
     > img {
       width: 100%;
       height: 100%;
     }
   }
 }
-
 .switch__checked {
-  // background-color: var(--primary-color);
-  // border-color: var(--primary-color);
   &::before {
     transform: scale(0);
   }
-  .pointer {
-    transform: scale(0.98) translateX(20PX);
+  .pointer, &::after {
+    transform: scale(0.98) translateX(21PX);
   }
+}
+.switch__checked--color {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 </style>
