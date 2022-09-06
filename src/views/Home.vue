@@ -9,7 +9,7 @@
     </div>
 
     <mo-scrollbar class='items'>
-        <div class="item" v-for="(item, index) in 50" :key="index">{{ item }}</div>  
+      <div class="item" v-for="(item, index) in 50" :key="index">{{ item }}</div>  
     </mo-scrollbar> -->
     
     <button @click="switchBtn">switch</button>

@@ -18,6 +18,11 @@ const routes = [
         name: 'Scrollbar',
         component: () => import('@/views/component/scrollbar'),
       },
+      {
+        path: '/component/switch',
+        name: 'Switch',
+        component: () => import('@/views/component/switch'),
+      },
     ],
   },
 ];
