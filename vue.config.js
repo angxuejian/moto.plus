@@ -13,7 +13,11 @@ module.exports = {
   // 生产环境下不校验 eslint
   lintOnSave: process.env.NODE_ENV !== 'production',
 
+  // 生成环境下不生产 sourcemap
+  productionSourceMap: false,
+
   configureWebpack: {
+    devtool: 'source-map',
     module: {
       rules: [
         {

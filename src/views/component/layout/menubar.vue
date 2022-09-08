@@ -1,14 +1,20 @@
 <template>
   <div class="menubar">
 
-    <div>菜单</div>
-    <div>top</div>
+    <div @click="openSide" class="menu"></div>
+    <div></div>
   </div>
 </template>
 
 <script>
+// import { ref } from 'vue'
+import { useStore } from 'vuex'
 export default {
-  
+  setup() {
+    const store = useStore()
+    const openSide = () => { store.dispatch('CHANGE_SIDE', true)}
+    return { openSide }
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -28,5 +34,13 @@ export default {
   justify-content: space-between;
   display: none;
   z-index: var(--men-z-index);
+  .menu {
+    width: 23PX;
+    height: 23PX;
+    display: block;
+    background: var(--mo-menu) no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+  }
 }
 </style>

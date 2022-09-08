@@ -15,7 +15,7 @@
           </div>
           
           <div class="theme-switch">
-            <mo-switch v-model="switchValue" theme @change='onCallbackSwitchChange' />
+            <mo-switch theme @change='onCallbackSwitchChange' />
           </div>
           <a class="remove-defult" alt='angxuejian/moto.plus' href="https://github.com/angxuejian/moto.plus">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github mo-github" viewBox="0 0 16 16">
@@ -33,18 +33,18 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 export default {
   name: 'APP',
-
+  
   setup() {
     const store = useStore()
     const subPages = ref([
       { name: '首页', url: '/' },
       { name: '组件', url: '/component' },
     ])
-    const selectSubPageIndex = ref(0)
+    const selectSubPageIndex = computed(() => store.state.path === '/' ? 0 : 1)
     const getSubPage = index => { selectSubPageIndex.value = index }
     const onCallbackSwitchChange = () => { store.dispatch('CHANGE_THEME') }
 
@@ -87,7 +87,6 @@ html, body, #app {
       display: flex;
       align-items: center;
       text-decoration: none;
-      // width: 20%;
       height: 100%;
       div {
         background: var(--mo-logo) no-repeat;
@@ -136,9 +135,7 @@ html, body, #app {
       }
 
       .theme-switch {
-        // width: 100px;
         margin: 0 30PX;
-        // background: red;
       }
       .mo-github {
         color: var(--mo-text-primary-color);
