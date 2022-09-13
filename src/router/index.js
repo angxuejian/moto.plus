@@ -11,17 +11,17 @@ const routes = [
     path: '/component',
     name: 'Component',
     redirect: '/component/scrollbar',
-    component: () => import('@/views/component/layout'),
+    component: () => import('@/views/layout'),
     children: [
       {
         path: '/component/scrollbar',
         name: 'Scrollbar',
-        component: () => import('@/views/component/scrollbar'),
+        component: () => import('@/views/examples/docs/scrollbar.md'),
       },
       {
         path: '/component/switch',
         name: 'Switch',
-        component: () => import('@/views/component/switch'),
+        component: () => import('@/views/examples/docs/switch.md'),
       },
     ],
   },

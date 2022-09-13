@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   pages: {
     index: {
@@ -24,6 +26,13 @@ module.exports = {
           test: /\.mjs$/,
           include: /node_modules/,
           type: 'javascript/auto',
+        },
+        {
+          test: /examples|docs|.*.md$/,
+          use: [
+            { loader: 'vue-loader', options: { compilerOptions: { preserveWhitespace: false } } },
+            { loader: path.resolve(__dirname, './loaders/md-loader/index.js') },
+          ],
         },
       ],
     },
