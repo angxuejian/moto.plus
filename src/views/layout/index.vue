@@ -8,6 +8,7 @@
       <div class="view-wrapper">
         <router-view />
       </div>
+      <!-- <div class="toc-wrapper"></div> -->
     </div>
 
   </div>
@@ -35,14 +36,13 @@ export default {
   padding-top: var(--navbar-margin);
   width: 100%;
   box-sizing: border-box;
-  padding-left: var(--sidebar-width);
+  padding-left: calc(var(--sidebar-width) + 3%);
   background-color: var(--mo-bg-color);
   display: flex;
   align-items: flex-start;
-  justify-content: flex-end;
   .view-wrapper {
-    width: 93%;
-    padding: 20PX 0 20PX 0;
+    width: 62%;
+    padding: 25PX 0;
     box-sizing: border-box;
   }
 }

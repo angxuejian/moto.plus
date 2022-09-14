@@ -31,7 +31,7 @@ module.exports = {
           test: /examples|docs|.*.md$/,
           use: [
             { loader: 'vue-loader', options: { compilerOptions: { preserveWhitespace: false } } },
-            { loader: path.resolve(__dirname, './loaders/md-loader/index.js') },
+            { loader: path.resolve(__dirname, './src/md-loader/index.js') },
           ],
         },
       ],
