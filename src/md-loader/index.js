@@ -6,14 +6,10 @@ module.exports = function(source) {
   
   return `
     <template>
-      <div>
-      ${htmlSource}
-      
-      </div>
+      <div> ${htmlSource} </div>
     </template>
 
     <script>
-
       import demoBlock from '@/md-loader/src/index.vue'
       export default {
         components: { demoBlock }
@@ -21,7 +17,3 @@ module.exports = function(source) {
     </script>
   `
 }
-
-{/* <demo-block>
-<template v-slot:source>${htmlSource}</template>
-</demo-block> */}

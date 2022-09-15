@@ -1,7 +1,5 @@
 const mdContainer = require('markdown-it-container')
-
-const name = 'demo'
-const reg = new RegExp(`^${name}\\s*(.*)$`) // \s => \\s (转义\)
+const { name, reg } = require('./util')
 
 module.exports = function(md) {
 
@@ -10,22 +8,26 @@ module.exports = function(md) {
       return params.trim().match(reg)
     },
     render: function(tokens, idx) {
-      const m = tokens[idx].info.trim().match(reg)
+      const token = tokens[idx]
+      const m = token.info.trim().match(reg)
 
-      if (tokens[idx].nesting === 1) {
+      if (token.nesting === 1) {
         const desc = m && m.length > 1 ? m[1] : ''
-        const { type, content } = tokens[idx + 1]
-        const code = type === 'fence' ? content : '' // fence => ``` xxx ```代码块
+
+        const nextToken = tokens[idx + 1]
+        const code = nextToken.type === 'fence' ? nextToken.content : '' // fence => ``` xxx ```代码块
 
         return `
-        <div>
-          ${ desc ? `<div>${md.render(desc)}</div>` : '' }
+        <demo-block>
+          ${ desc ? `<template v-slot:desc>${md.render(desc)}</template>` : '' }
           <!--moto-demo: ${code} :moto-demo-->
         `
-      } else return '</div>'
+      } else return '</demo-block>'
     },
   })
 
   md.use(mdContainer, 'tip')
   md.use(mdContainer, 'warning')
 }
+
+// https://github.com/markdown-it/markdown-it-container#example

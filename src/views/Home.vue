@@ -1,39 +1,12 @@
 <template>
   <div class="home">
-    首页
-    <!-- <div class="logo"></div>  -->
-    <!-- <div class="title">
-      <span>Moto.plus</span>
-      <span>二级标题</span>
-      <span>三级标题</span>
-    </div>
-
-    <mo-scrollbar class='items'>
-      <div class="item" v-for="(item, index) in 50" :key="index">{{ item }}</div>  
-    </mo-scrollbar> -->
-    
-    <button @click="switchBtn">switch</button>
+    123
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'Home',
-  data() {
-    return {
-      isDark: false,
-      logo: '',
-    }
-  },
-  created() {
-    // this.$store.dispatch('CHANGE_THEME')
-  },
-  methods: {
-    switchBtn: function() {
-      this.$store.dispatch('CHANGE_THEME')
-    },
-  },
 };
 </script>
 

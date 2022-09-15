@@ -1,6 +1,7 @@
 const Config = require('markdown-it-chain')
 const { anchorPlugin, options } = require('./anchor')
 const containerPlugin = require('./container')
+const setCodeFenceHighlight = require('./fence')
 
 const config = new Config()
 config.options.html(true).end()
@@ -14,10 +15,8 @@ config.options.html(true).end()
   .end()
 
 const md = config.toMd()
+
+setCodeFenceHighlight(md)
 module.exports = md
 
-// text-decoration: none;
-// color: red;
-// opacity: 0;
-// float: left;
-// margin-left: -20px;
+// https://github.com/ULIVZ/markdown-it-chain#getting-started
