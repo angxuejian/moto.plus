@@ -28,7 +28,7 @@ module.exports = {
           type: 'javascript/auto',
         },
         {
-          test: /examples|docs|.*.md$/,
+          test: /docs\\.*.md$/, // 只渲染 examples\docs\目录下的 .md文件
           use: [
             { loader: 'vue-loader', options: { compilerOptions: { preserveWhitespace: false } } },
             { loader: path.resolve(__dirname, './src/md-loader/index.js') },

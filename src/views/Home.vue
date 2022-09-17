@@ -1,12 +1,17 @@
 <template>
   <div class="home">
-    123
+    1234444
+    <basic />
   </div>
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue' 
 export default {
   name: 'Home',
+  components: {
+    'basic': defineAsyncComponent(() => import('./examples/demo/scrollbar/basic.vue')),
+  },
 };
 </script>
 

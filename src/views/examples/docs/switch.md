@@ -1,25 +1,14 @@
-# switch123
+# switch
 
 
-
-456
-
-> wo men buyiy ?
-
-| 事件名 | 说明               | 回调参数 |
-| ------ | ------------------ | -------- |
-| click  | 点击按钮触发的事件 | 点击事件 |
-
-### 是
-
-## 123
-
-:::tip 
-456789999?
+::: demo test1000000
+```html
+<div>123</div>
+```
 :::
 
-:::warning 
-
-我们不一样在
-
+::: demo test100
+```component
+<scrollbar/basic />
+```
 :::

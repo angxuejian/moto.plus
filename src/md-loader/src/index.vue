@@ -1,29 +1,27 @@
 <template>
   <div>
-    这是demo-block
 
-    <!-- 展示组件 -->
-    <div class="component"></div>
-
-    <!-- 组件使用描述 -->
-    <div class="desc"><slot name="desc"></slot></div>
-
-    <!-- 组件使用代码 -->
+    <div class="component"><slot name="component"></slot></div>
+    <div v-if="$slots.desc" class="desc"><slot name="desc"></slot></div>
     <div v-highlight class="code"><slot name="code"></slot></div>
+
+    <div><slot></slot></div>
   </div>
 </template>
 
 <script>
-import './common/index.scss'
+/**
+ * slots.component:  组件
+ * slots.desc: 描述
+ * slots.code: 组件源代码
+ * slots.default: 其他代码块内容
+ */
 import highlight from './common/highlight'
+import './common/index.scss'
 export default {
+  name: 'DemoBlock',
   directives: { highlight },
 }
 </script>
 <style lang="scss" scoped>
-.desc {
-  height: 50px;
-  width: 100%;
-}
-
 </style>

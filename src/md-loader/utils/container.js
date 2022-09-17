@@ -1,11 +1,11 @@
 const mdContainer = require('markdown-it-container')
-const { name, reg } = require('./util')
+const { blockName, fenceName, reg, replaceSpace } = require('./util')
 
 module.exports = function(md) {
 
-  md.use(mdContainer, name, {
+  md.use(mdContainer, blockName, {
     validate: function(params) {
-      return params.trim().match(reg)
+      return params.trim().match(reg) // :::demo && render()
     },
     render: function(tokens, idx) {
       const token = tokens[idx]
@@ -16,12 +16,14 @@ module.exports = function(md) {
 
         const nextToken = tokens[idx + 1]
         const code = nextToken.type === 'fence' ? nextToken.content : '' // fence => ``` xxx ```代码块
+        const demo = replaceSpace(nextToken.info) === fenceName 
+          ? `<!--moto-demo: ${code} :moto-demo-->` 
+          : `<template>${md.render(code)}</template>`
 
         return `
-        <demo-block>
-          ${ desc ? `<template v-slot:desc>${md.render(desc)}</template>` : '' }
-          <!--moto-demo: ${code} :moto-demo-->
-        `
+        <demo-block> 
+          ${ desc ? `<template v-slot:desc>${md.render(desc)}</template>` : '' } 
+        ` + (demo)
       } else return '</demo-block>'
     },
   })
