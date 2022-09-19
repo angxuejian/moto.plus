@@ -5,7 +5,7 @@
     <div v-if="$slots.desc" class="desc"><slot name="desc"></slot></div>
     <div v-highlight class="code"><slot name="code"></slot></div>
 
-    <div><slot></slot></div>
+    <div v-highlight><slot></slot></div>
   </div>
 </template>
 

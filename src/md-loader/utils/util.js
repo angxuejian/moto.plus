@@ -10,7 +10,7 @@ const regTag = /<(\S*)\s+\/>/  // <test />  or  <scrollbar/test />   => test or 
 
 const replaceSpace = str => str.replace(/\s+/g, '')
 const readComponent = vname => fs.readFileSync(path.resolve(`src/views/examples/${blockName}`, `${vname}.vue`), 'utf-8')
-const importComponent = vname => `defineAsyncComponent(() => import('../${blockName}/${vname}.vue'))`
+const importComponent = vname => `defineAsyncComponent(() => import('@/views/examples/${blockName}/${vname}.vue'))`
 
 const renderComponent = html => {
 
