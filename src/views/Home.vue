@@ -1,16 +1,25 @@
 <template>
   <div class="home">
-    1234444
+    12344440
     <basic />
+    <moto-demo />
   </div>
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue' 
+import { defineAsyncComponent, h } from 'vue'
+
 export default {
   name: 'Home',
   components: {
     'basic': defineAsyncComponent(() => import('./examples/demo/scrollbar/basic.vue')),
+    'moto-demo': {
+      render() {
+        return [
+          h('div', {}, 'inline component -- > render'),
+        ]
+      },
+    },
   },
 };
 </script>

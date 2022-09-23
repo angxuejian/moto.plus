@@ -1,5 +1,5 @@
 const mdContainer = require('markdown-it-container')
-const { blockName, fenceName, reg, replaceSpace } = require('./util')
+const { blockName, fenceCompName, reg, replaceSpace, fenceHtmlName } = require('./util')
 
 module.exports = function(md) {
 
@@ -12,12 +12,13 @@ module.exports = function(md) {
       const m = token.info.trim().match(reg)
 
       if (token.nesting === 1) {
-        const desc = m && m.length > 1 ? m[1] : ''
-
         const nextToken = tokens[idx + 1]
+        const info = replaceSpace(nextToken.info)
+
+        const desc = m && m.length > 1 ? m[1] : ''
         const code = nextToken.type === 'fence' ? nextToken.content : '' // fence => ``` xxx ```代码块
-        const demo = replaceSpace(nextToken.info) === fenceName 
-          ? `<!--moto-demo: ${code} :moto-demo-->` 
+        const demo = info === fenceCompName || info === fenceHtmlName 
+          ? `<!--moto-demo:[${info}] ${code} :moto-demo-->`
           : `<template>${md.render(code)}</template>`
 
         return `
