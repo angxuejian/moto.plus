@@ -1,7 +1,8 @@
 const md = require('./utils/config')
 const { 
   regTag, regType, 
-  fenceCompName, fenceHtmlName, 
+  fenceCompName, fenceHtmlName,
+  getFenceType, 
   importComponent, renderComponent,
 } = require('./utils/util')
 
@@ -22,6 +23,7 @@ module.exports = function(source) {
   
   let templateArray = [] // html
   let componentStr = '' // 子组件
+  let componentSty = '' // 全局子组件样式，样式未隔离
   
   let index = 0
   let start = html.indexOf(startTag)
@@ -29,8 +31,10 @@ module.exports = function(source) {
   
   while (start !== -1 && end !== -1) {
     templateArray.push(html.slice(index, start)) // 每个<!--moto-demo: 之前的数据
-    const content = html.slice(start + startTagLength, end)
-    const type = content.match(regType)[1]
+
+    const source = html.slice(start + startTagLength, end)
+    const type = source.match(regType)[1]
+    const content = source.replace(getFenceType(type), '')
 
     // ```component
     if (type === fenceCompName) {
@@ -39,7 +43,11 @@ module.exports = function(source) {
       if (path) joinComponent(path[1].split('/').pop(), importComponent(path[1]))
     } 
     // ```html
-    else if (type === fenceHtmlName) joinComponent(`${demoComponentName}${index}`, renderComponent())
+    else if (type === fenceHtmlName) {
+      const { css, component } = renderComponent(content, index)
+      componentSty += css
+      joinComponent(`${demoComponentName}${index}`, component)
+    }
     
     index = end + endTagLength
     start = html.indexOf(startTag, index)
@@ -55,11 +63,22 @@ module.exports = function(source) {
 
     <script>
       import demoBlock from '@/md-loader/src/index'
-      import { defineAsyncComponent, h } from 'vue' 
+      import { defineAsyncComponent, 
+        toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, 
+        vModelText as _vModelText, withDirectives as _withDirectives, 
+        Fragment as _Fragment, openBlock as _openBlock, 
+        createElementBlock as _createElementBlock,
+        createTextVNode as _createTextVNode,
+        } from 'vue'
+
       export default {
         name: 'component-docs',
         components: { demoBlock, ${componentStr} }
       }
     </script>
+
+    <style>
+    ${componentSty}
+    </style>
   `
 }
