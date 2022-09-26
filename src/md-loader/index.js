@@ -55,7 +55,7 @@ module.exports = function(source) {
   }
 
   templateArray.push(html.slice(index)) // 最后一个:moto-demo--> 之后的数据
-
+  
   return `
     <template>
       <div class='docs-wrapper'> ${templateArray.join('')} </div>
@@ -69,6 +69,7 @@ module.exports = function(source) {
         Fragment as _Fragment, openBlock as _openBlock, 
         createElementBlock as _createElementBlock,
         createTextVNode as _createTextVNode,
+        pushScopeId as _pushScopeId, popScopeId as _popScopeId 
         } from 'vue'
 
       export default {

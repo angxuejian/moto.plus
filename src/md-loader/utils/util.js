@@ -1,5 +1,4 @@
-const { parse, compileTemplate } = require('vue/compiler-sfc')
-// compileStyle
+const { parse, compileTemplate, compileStyle } = require('vue/compiler-sfc')
 
 const path = require('path')
 const fs = require('fs')
@@ -20,11 +19,12 @@ const importComponent = vname => `defineAsyncComponent(() => import('@/views/exa
 // https://github.com/vuejs/vue-loader/blob/next/src/templateLoader.ts 创建template
 // https://github.com/vuejs/repl/blob/main/src/transform.ts js与样式转换
 const renderComponent = (source, id) => {
- 
   const { descriptor } = parse(source)
+  const scoped = true // 默认为独立样式，单个标签scopedId会添加失败，vue3.0.0版本bug
+
   descriptor.id = `${id}`
   descriptor.filename = 'inline-component'
-
+  descriptor.scoped = scoped
   const compiled = compileTemplate(descriptor)
   let script = getScriptCode(descriptor.script)
   if (script) {
@@ -35,18 +35,18 @@ const renderComponent = (source, id) => {
 
   let css = ''
   for (const style of descriptor.styles) {
-    // console.log(style, '-->')
-    // const opt = {
-    //   source: style.content,
-    //   id: descriptor.id,
-    //   filename: descriptor.filename,
-    //   scoped: style.scoped,
-    //   modules: !!style.module,
-    // }
-    // const styleResult = compileStyle(opt)
-    // css += styleResult.code + '\n'
-    css += style.content
+    const opt = {
+      source: style.content,
+      id: descriptor.id,
+      filename: descriptor.filename,
+      scoped: scoped, // style.scoped,
+      modules: !!style.module,
+    }
+    const styleResult = compileStyle(opt)
+    css += styleResult.code + '\n'
+    // css += style.content
   }
+
   return {
     component: `(function() {
       ${getRenderCode(compiled.code)}

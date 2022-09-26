@@ -1,10 +1,19 @@
 # switch
 
-123456---?000
-::: demo 12test1000000000
+123456---?000000
+::: demo 12test100000000000
 ```html
 
-<div>123</div>
+<div class='number'>123</div>
+<span></span>
+
+
+<style> 
+div {
+  background: red;
+  color: #fff
+}
+</style>
 ```
 :::
 

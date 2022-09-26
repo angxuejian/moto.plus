@@ -1,21 +1,14 @@
-# 自定义滚动条ddd0.
+# 自定义滚动条ddd0.000
 
-# xxxxz000000000000000000000
+# 0xxxxz0000000000000000000000000000000
+
+
+# 123456789100000000
+
 ::: demo
 ```html
-<div class='test'>123</div>
-<div @click='showAlert'>456</div>
+<div class='test'>12369999</div>
 
-<script>
-  export default {
-    setup() {
-      const showAlert = () => { alert('in line component click event') }
-      return {
-        showAlert
-      }
-    },
-  }
-</script>
 
 <style lang="scss" scoped>
   .test {
@@ -27,4 +20,20 @@
 </style>
 ```
 :::
-## 1234567891
+
+::: demo
+```html
+<div class='test1'>666</div>
+<span></span>
+
+
+<style lang="scss" scoped>
+  .test1 {
+    background: black;
+    color: #fff;
+    width: 100px;
+    height: 100px;
+  }
+</style>
+```
+:::
