@@ -49,7 +49,7 @@ const renderComponent = (source, id) => {
 
   return {
     component: `(function() {
-      ${getRenderCode(compiled.code)}
+      ${getRenderCode(compiled.code, descriptor)}
       ${script}
       return {
         render,
@@ -84,11 +84,45 @@ module.exports = {
  *  ], 64 /* STABLE_FRAGMENT *\/))
  * }
  */
-function getRenderCode(code) {
+
+function getRenderCode(code, descriptor) {
   const target = '"vue"'
   const targetLength = target.length
   const index = code.indexOf(target)
-  return code.slice(index + targetLength).replace(/export/g, '')
+  let render = code.slice(index + targetLength).replace(/export/g, '')
+  return rewriteRenderCode(render, descriptor)
+}
+
+/**
+ * 重写 render函数
+ * _withScopeId只出现1次 => 单个标签的 scopeId没有加载成功
+ *  嵌套多层标签 => 最外层div无法添加scopeId
+ * @param {string} code render组件字符串
+ * @param {object} descriptor 源码的ast树，获取最外层标签
+ * @returns 
+ */
+function rewriteRenderCode(code, descriptor) {
+  let render = code
+
+  const scoped = render.match(/_withScopeId/g)
+  const hoisted = render.match(/const _hoisted_1 = {.*}/g)
+
+  // 先查找 _hoisted_1 所在行
+  if (hoisted) {
+    const m = hoisted[0].match(scoped)
+    // 查找 _withScopeId 是否存在，不存在证明没有添加成功 scopeId => 重新 render函数
+    if (!m) {
+      const tag = descriptor.customBlocks[0]
+      const renderStr = /_openBlock\(\),(.*)\)/
+
+      const _hoisted_end = render.match(/_createElementBlock\("div", _hoisted_1, (.*)\)\)/)[1]
+      const _hoisted_start = `_openBlock(), _createElementBlock(_Fragment, null, [
+        _withScopeId(() => _createElementVNode("${tag.type}", _hoisted_1, ${_hoisted_end})) 
+      ]))`
+      render = render.replace(renderStr, _hoisted_start)
+    }
+  }
+  return render
 }
 
 function getScriptCode(code) {

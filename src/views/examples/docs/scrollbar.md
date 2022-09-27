@@ -3,33 +3,18 @@
 # 0xxxxz0000000000000000000000000000000
 
 
-# 123456789100000000
+# 123456789100000000000000
 
 ::: demo
 ```html
-<div class='test'>12369999</div>
+<div class='test'>
+  <span>还是有样式！</span>
+</div>
 
 
-<style lang="scss" scoped>
+<style>
   .test {
-    background: red;
-    color: #fff;
-    width: 100px;
-    height: 100px;
-  }
-</style>
-```
-:::
-
-::: demo
-```html
-<div class='test1'>666</div>
-<span></span>
-
-
-<style lang="scss" scoped>
-  .test1 {
-    background: black;
+    background: blue;
     color: #fff;
     width: 100px;
     height: 100px;

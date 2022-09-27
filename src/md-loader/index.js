@@ -55,7 +55,7 @@ module.exports = function(source) {
   }
 
   templateArray.push(html.slice(index)) // 最后一个:moto-demo--> 之后的数据
-  
+  // console.log(componentStr, '......')
   return `
     <template>
       <div class='docs-wrapper'> ${templateArray.join('')} </div>
