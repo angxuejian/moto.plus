@@ -55,14 +55,15 @@ module.exports = function(source) {
   }
 
   templateArray.push(html.slice(index)) // 最后一个:moto-demo--> 之后的数据
-  // console.log(componentStr, '......')
+
   return `
     <template>
-      <div class='docs-wrapper'> ${templateArray.join('')} </div>
+      <div v-highlight class='docs-wrapper'> ${templateArray.join('')} </div>
     </template>
 
     <script>
       import demoBlock from '@/md-loader/src/index'
+      import highlight from '@/md-loader/src/common/highlight.js'
       import { defineAsyncComponent, 
         toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, 
         vModelText as _vModelText, withDirectives as _withDirectives, 
@@ -74,7 +75,8 @@ module.exports = function(source) {
 
       export default {
         name: 'component-docs',
-        components: { demoBlock, ${componentStr} }
+        components: { demoBlock, ${componentStr} },
+        directives: { highlight },
       }
     </script>
 

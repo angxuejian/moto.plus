@@ -1,5 +1,5 @@
 const mdContainer = require('markdown-it-container')
-const { blockName, fenceCompName, fenceHtmlName,  reg, replaceSpace, getFenceType } = require('./util')
+const { blockName, reg, replaceSpace, getFenceType } = require('./util')
 
 module.exports = function(md) {
 
@@ -18,14 +18,13 @@ module.exports = function(md) {
         
         const desc = m && m.length > 1 ? m[1] : ''
         const code = nextToken.type === 'fence' ? nextToken.content : '' // fence => ``` xxx ```代码块
-        const demo = info === fenceCompName || info === fenceHtmlName 
-          ? `<!--moto-demo:${type} ${code} :moto-demo-->`
-          : `<template>${md.render(code)}</template>`
+        // <template>${md.render(code)}</template> 渲染非 html 和 component 的代码块
 
         return `
         <demo-block> 
           ${ desc ? `<template v-slot:desc>${md.render(desc)}</template>` : '' } 
-        ` + (demo)
+          <!--moto-demo:${type} ${code} :moto-demo-->
+        `
       } else return '</demo-block>'
     },
   })
