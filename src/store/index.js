@@ -22,9 +22,13 @@ export default createStore({
       if (!context.state.theme) {
         document.documentElement.setAttribute('theme', 'dark')
         context.commit('SET_THEME', 'dark')
+        // import('highlight.js/styles/atom-one-dark.css')
+        document.getElementById('__sfc-link').href = '/styles/atom-one-dark.css'
       } else {
         document.documentElement.removeAttribute('theme')
         context.commit('SET_THEME', '')
+        document.getElementById('__sfc-link').href = '/styles/atom-one-light.css'
+
       }
     },
 

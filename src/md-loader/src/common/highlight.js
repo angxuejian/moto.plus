@@ -1,5 +1,5 @@
 import hljs from 'highlight.js'
-import 'highlight.js/styles/atom-one-dark.css'
+
 hljs.configure({
   ignoreUnescapedHTML: true, // 关闭 html未转义的警告 https://github.com/highlightjs/highlight.js/wiki/security
 })

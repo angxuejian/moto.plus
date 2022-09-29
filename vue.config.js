@@ -18,7 +18,10 @@ module.exports = {
   // 生成环境下不生产 sourcemap
   productionSourceMap: false,
 
+
+
   configureWebpack: {
+ 
     devtool: 'source-map',
     module: {
       rules: [
@@ -54,4 +57,6 @@ module.exports = {
       // },
     },
   },
+
+
 };

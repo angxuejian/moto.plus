@@ -1,8 +1,8 @@
 # 自定义滚动条ddd0.000
 
-# 0xxxxz000000000000000000000000000000000
+# 0xxxxz
 
-::: demo `name000`
+::: demo
 ```html
 <div class='test'>
   <span>dd000ddddd</span>
@@ -18,11 +18,3 @@
 </style>
 ```
 :::
-
-```js
-const name = 'yuhua'
-// 213145465
-// 456
-// 789
-// 789
-```

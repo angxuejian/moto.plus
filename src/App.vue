@@ -47,7 +47,7 @@ export default {
     const selectSubPageIndex = computed(() => store.state.path === '/' ? 0 : 1)
     const getSubPage = index => { selectSubPageIndex.value = index }
     const onCallbackSwitchChange = () => { store.dispatch('CHANGE_THEME') }
-
+    
     return { subPages, selectSubPageIndex, getSubPage, onCallbackSwitchChange }
   },
 }

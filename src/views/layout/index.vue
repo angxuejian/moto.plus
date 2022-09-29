@@ -21,6 +21,9 @@ import menubar from './menubar.vue'
 export default {
   name: 'Layout',
   components: { sidebar, menubar },
+
+  mounted () {
+  },
 }
 </script>
 
