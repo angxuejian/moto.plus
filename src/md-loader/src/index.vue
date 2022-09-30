@@ -10,7 +10,7 @@
     
     <div 
       class="component-source"
-      ref='componentSource'
+      :style="`height: ${componentSourceHeight}px;`"
     >
       <div v-if="$slots.desc" ref='desc' class="desc"><slot name="desc"></slot></div>
       <div ref='code'><slot name="code"></slot></div>
@@ -19,12 +19,11 @@
     <div
       class="control"
       ref="control"
-      :class="{ 'control__fixed' : isControlFixed }"
+      :class="{ 'control__fixed' : isExpanded }"
       @click="isExpanded = !isExpanded"
       >
       <i :class="['fa', `fa-caret-${isExpanded ? 'up': 'down'}`, { 'hovering': hovering }]" aria-hidden="true"></i>
-      <span :class="hovering ? 'control-text-show' : 'control-text-hide'">{{ controlText }}</span>
-
+      <span :class="{ 'hovering': hovering }">{{ controlText }}</span>
     </div>
 
   </div>
@@ -38,160 +37,108 @@
  * slots.default: 其他代码块内容
  */
 import './common/index.scss'
-import { ref, computed, watch, onBeforeUnmount } from 'vue'
+import { ref, computed } from 'vue'
 export default {
   name: 'DemoBlock',
 
   setup() {
     const hovering = ref(false)
     const isExpanded = ref(false)
-    const isControlFixed = ref(false)
 
     const desc = ref(null)
     const code = ref(null)
-    const componentSource = ref(null)
     const control = ref(null)
 
     const controlText = computed(() => isExpanded.value ? '隐藏代码' : '显示代码')
     const componentSourceHeight = computed(() => {
-      if (desc.value) {
-        return desc.value.clientHeight + code.value.clientHeight + 20
-      } else return code.value.clientHeight
-    })
-    const hljscss = ref('highlight.js/styles/atom-one-dark.css')
-
-    const scrollHandler = () => {
-      const { top, bottom, left, width } = componentSource.value.getBoundingClientRect()
-      const documentHight = document.documentElement.clientHeight
-      isControlFixed.value = bottom > documentHight && top + 20 <= documentHight
-      control.value.style = `width: ${width}px; left:${isControlFixed.value ? left : 0}px;`
-    }
-    const removeScroll = () => window.removeEventListener('scroll', scrollHandler)
-
-
-    watch(isExpanded, val => {
-      componentSource.value.style.height = val ? `${componentSourceHeight.value + 1}px` : '0px'
-      if (!val) {
-        isControlFixed.value = false
-        control.value.style = ''
-        removeScroll()
+      let height = 0
+      if (isExpanded.value) {
+        if (desc.value) {
+          height = desc.value.clientHeight + code.value.clientHeight + 20
+        } else height = code.value.clientHeight
       }
-      setTimeout(() => {
-        window.addEventListener('scroll', scrollHandler)
-        scrollHandler()
-      }, 200);
+      return height
     })
-    
 
-    onBeforeUnmount(() => removeScroll())
     return {
+      hovering, isExpanded,
       desc, code,
-      componentSource,
-      isControlFixed,
-      hovering, isExpanded, control, controlText, hljscss,
+      control, 
+      controlText,
+      componentSourceHeight,
     }
   },
 }
 </script>
 <style lang="scss">
 .demo-block {
-  border: solid 1PX #ebebeb;
+  border: solid 1PX var(--mo-demo-border);
   border-radius: 3PX;
   transition: .2s;
+  margin-bottom: 15PX;
   &.demo-block__hover {
-    box-shadow: 0 0 8PX 0 rgba(232, 237, 250, .6), 0 2PX 4PX 0 rgba(232, 237, 250, .5);
+    box-shadow: var(--mo-demo-block-hover);
   }
 
-  code {
-    font-family: Menlo, Monaco, Consolas, Courier, monospace;
-  }
   .component {
     padding: 24PX;
   }
   .component-source {
-    background-color: #fafafa;
-    border-top: solid 1PX #eaeefb;
+    background-color: var(--mo-hljs-bc-color);
+    border-top: solid 1PX var(--mo-demo-control);
     overflow: hidden;
-    // height: 0;
+    height: 0;
     transition: height .2s;
   }
 
-  .desc {
-    padding: 20PX;
-    box-sizing: border-box;
-    border: solid 1PX #ebebeb;
-    border-radius: 3PX;
-    font-size: 14PX;
-    line-height: 22PX;
-    color: #666;
-    word-break: break-word;
-    margin: 15PX;
-    margin-bottom: 0;
-    background-color: #fff;
-
-    p {
-      margin: 0;
-      line-height: 26PX;
-    }
-
-    code {
-      color: #5e6d82;
-      background-color: #e6effb;
-      margin: 0 4PX;
-      display: inline-block;
-      padding: 1PX 5PX;
-      font-size: 12PX;
-      border-radius: 3PX;
-      height: 18PX;
-      line-height: 18PX;
-    }
-  }
+  
 
   .control {
-    border-top: solid 1PX #eaeefb;
+    border-top: solid 1PX var(--mo-demo-border);
     height: 44PX;
     box-sizing: border-box;
-    background-color: #fff;
+    background-color: var(--mo-bg-color);
     border-bottom-left-radius: 4PX;
     border-bottom-right-radius: 4PX;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: -1PX;
-    color: #d3dce6;
+    color:#d3dce6;
     cursor: pointer;
+    position: relative;
     &.control__fixed {
-      position: fixed;
+      position: sticky;
       bottom: 0;
       border-radius: 0 !important;
     }
 
     i {
+      position: absolute;
       font-size: 14PX;
       transition: .3s;
-      transform: translateX(23PX);
       &.hovering {
-        transform: translateX(0px);
+        transform: translateX(-25px);
       }
     }
+
     > span {
       font-size: 14PX;
       transition: .3s;
       display: inline-block;
-      opacity: 1;
-      &.control-text-show {
-        transform: translateX(7px);
-      }
-      &.control-text-hide {
-        transform: translateX(30PX);
-        opacity: 0;
+      opacity: 0;
+      position: absolute;
+      transform: translateX(30PX);
+      &.hovering {
+        transform: translateX(10px);
+        opacity: 1;
       }
     }
     
     
     &:hover {
-      color: #409EFF;
-      background-color: #f9fafc;
+      color: var(--primary-color);
+      background-color: var(--mo-demo-control-hover);
     }
   }
 }

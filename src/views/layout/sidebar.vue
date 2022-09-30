@@ -5,7 +5,7 @@
       <mo-scrollbar scroll-y class="sidebar-wrapper">
         <div class="sidebar-item" v-for="(item, index) in sidebarArr" :key='index'>
           <p class="sidebar-item__title">{{ item.title }}</p>
-          <router-link class="remove-defult" v-for="(s, i) in item.children" :key="i" :to="item.url + s.url">
+          <router-link v-for="(s, i) in item.children" :key="i" :to="item.url + s.url">
             <span :class="['sidebar-item__link', { 'sidebar-item__selected': sidebarIndex === (item.url + s.url) }]">{{ s.name }}</span>
           </router-link>
         </div>
