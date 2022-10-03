@@ -104,7 +104,7 @@ export default {
     align-items: center;
     justify-content: center;
     margin-top: -1PX;
-    color:#d3dce6;
+    color: var(--mo-demo-control-font);
     cursor: pointer;
     position: relative;
     &.control__fixed {
@@ -118,7 +118,7 @@ export default {
       font-size: 14PX;
       transition: .3s;
       &.hovering {
-        transform: translateX(-25px);
+        transform: translateX(-333%);
       }
     }
 

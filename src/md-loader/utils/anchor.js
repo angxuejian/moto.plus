@@ -8,7 +8,7 @@ module.exports = {
     slugify,
     permalink: true,
     permalinkBefore: true,
-    permalinkSymbol: '🖖',
+    permalinkSymbol: '#',
   }],
 }
 

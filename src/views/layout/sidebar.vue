@@ -57,7 +57,6 @@ export default {
   z-index: var(--sid-z-index);
   top: calc(var(--navbar-height) + 1PX);
   background-color: var(--mo-bg-color);
-  // background-color: #ededed;
   height: calc(100% - var(--navbar-height) + 1PX);
   color: var(--mo-text-primary-color);
   transform: translateX(0);
@@ -106,7 +105,7 @@ export default {
 
 .has-sidebar {
   transform: translateX(0) !important;
-  width: 60%;
+  width: 70%;
   .sidebar-item {
     width: 80%;
   }

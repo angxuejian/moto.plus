@@ -1,12 +1,24 @@
 
+%code {
+  color: var(--primary-color);
+  background-color: var(--primary-color-bg);
+  margin: 0 5PX;
+  padding: 2.5PX 3PX;
+  font-size: 13PX;
+  border-radius: 3PX;
+}
+
+
 .view-wrapper {
   a {
-    opacity: 0;
-    float: left;
-    margin-left: -20PX;
-    transition: opacity 0.1s;
+    color: var(--primary-color);
+    text-decoration: none;
   }
-
+  p {
+    font-size: 14PX;
+    color: var(--mo-text-regular-color);
+    line-height: 1.5em;
+  }
   .desc, .warning, .tip {
     padding: 20PX;
     box-sizing: border-box;
@@ -21,12 +33,7 @@
       margin: 0;
     }
     code {
-      color: var(--primary-color);
-      background-color: var(--primary-color-bg);
-      margin: 0 5PX;
-      padding: 2.5PX 3PX;
-      font-size: 13PX;
-      border-radius: 3PX;
+      @extend %code;
     }
   }
 
@@ -66,11 +73,43 @@
 
 
 
-  h1 {
+  h1,h2,h3,h4,h5 {
     color: var(--mo-text-regular-color);
+    a {
+      opacity: 0;
+      float: left;
+      margin-left: -15PX;
+      transition: opacity 0.1s;
+      color: var(--mo-text-regular-color);
+    }
+    &:hover {
+      a {
+        opacity: 1;
+      }
+    }
   }
-  h1:hover a, h2:hover a {
-    opacity: 1;
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14PX;
+    margin-bottom: 45PX;
+    line-height: 1.5em;
+    tr {
+      border-bottom: solid 1PX var(--mo-demo-border);
+      color: var(--mo-text-regular-color);
+      th, td {
+        padding: 0 15PX;
+        box-sizing: border-box;
+        padding: 0.6em 1em;
+        text-align: left;
+        max-width: 222PX;
+        white-space: pre-wrap
+      }
+    }
+    code {
+      @extend %code;
+    }
   }
 
   .hljs {

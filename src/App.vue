@@ -63,6 +63,9 @@ html, body, #app {
   padding: 0;
   margin: 0;
 }
+body {
+  color: var(--mo-text-regular-color);
+}
 #app {
   background-color: var(--mo-bg-color);
   box-sizing: border-box;

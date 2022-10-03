@@ -1,6 +1,6 @@
 # switch
 
-123456---?000000
+123456---?000000000
 ::: demo 12test100000000000
 ```html
 
@@ -19,6 +19,6 @@ div {
 
 ::: demo test100
 ```component
-<scrollbar/basic />
+<switch/basic />
 ```
 :::

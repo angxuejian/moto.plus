@@ -44,7 +44,7 @@ export default {
   display: flex;
   align-items: flex-start;
   .view-wrapper {
-    width: 62%;
+    width: 70%;
     padding: 25PX 0;
     box-sizing: border-box;
   }
