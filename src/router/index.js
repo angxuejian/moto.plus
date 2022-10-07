@@ -23,6 +23,11 @@ const routes = [
         name: 'Switch',
         component: () => import('@/views/examples/docs/switch.md'),
       },
+      {
+        path: '/component/readme',
+        name: 'Readme',
+        component: () => import('@/views/examples/docs/readme.md'),
+      },
     ],
   },
 ];

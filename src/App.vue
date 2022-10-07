@@ -65,6 +65,7 @@ html, body, #app {
 }
 body {
   color: var(--mo-text-regular-color);
+  -webkit-tap-highlight-color: transparent
 }
 #app {
   background-color: var(--mo-bg-color);

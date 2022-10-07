@@ -4,10 +4,19 @@
     <div class="sidebar" :class="{ 'has-sidebar': hasSide }">
       <mo-scrollbar scroll-y class="sidebar-wrapper">
         <div class="sidebar-item" v-for="(item, index) in sidebarArr" :key='index'>
-          <p class="sidebar-item__title">{{ item.title }}</p>
-          <router-link v-for="(s, i) in item.children" :key="i" :to="item.url + s.url">
-            <span :class="['sidebar-item__link', { 'sidebar-item__selected': sidebarIndex === (item.url + s.url) }]">{{ s.name }}</span>
-          </router-link>
+
+          <template v-if="item.children">
+            <p class="sidebar-item__title">{{ item.title }}</p>
+            <router-link v-for="(s, i) in item.children" :key="i" :to="pathUrl(s.url)">
+              <span :class="['sidebar-item__link', { 'sidebar-item__selected': sidebarIndex === pathUrl(s.url) }]">{{ s.name }}</span>
+            </router-link>
+          </template>
+
+          <template v-else>
+            <router-link :to="pathUrl(item.url)">
+              <span :class="['sidebar-item__title', { 'sidebar-item__title-selected': sidebarIndex === pathUrl(item.url) }]">{{ item.title }}</span>
+            </router-link>
+          </template>
         </div>
       </mo-scrollbar>
     </div>
@@ -17,17 +26,24 @@
 <script>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 export default {
   
   setup() {
+    const pathUrl = url => `/component/${url}`
+
+    const router = useRouter()
     const store = useStore()
     const sidebarArr = ref([
       { title: 'Basic 基础组件',
-        url: '/component',
         children: [
-          { name: 'Scrollbar 滚动条', url: '/scrollbar' },
-          { name: 'Switch 开关', url: '/switch'},
+          { name: 'Scrollbar 滚动条', url: 'scrollbar' },
+          { name: 'Switch 开关', url: 'switch'},
         ],
+      },
+      {
+        title: 'Markdown 扩展',
+        url: 'readme',
       },
     ])
     const sidebarIndex = computed(() => store.state.path)
@@ -38,7 +54,12 @@ export default {
     onMounted(() => { store.dispatch('ADD_LISTENER', handleResize) })
     onUnmounted(() => store.dispatch('DEL_LISTENER', handleResize))
     
-    return { sidebarArr, sidebarIndex, hasSide, close }
+    const routerlink = item => {
+      if (item.children) return
+      router.push({ path: pathUrl(item.url) })
+    }
+
+    return { sidebarArr, sidebarIndex, hasSide, pathUrl, close, routerlink }
   },
 }
 </script>
@@ -93,10 +114,13 @@ export default {
       &:hover {
         color: var(--primary-color)
       }
-
     }
     .sidebar-item__selected {
       background-color: var(--primary-color-bg) !important;
+      color: var(--primary-color) !important;
+      font-weight: 600;
+    }
+    .sidebar-item__title-selected {
       color: var(--primary-color) !important;
       font-weight: 600;
     }

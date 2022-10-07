@@ -22,7 +22,7 @@
       :class="{ 'control__fixed' : isExpanded }"
       @click="isExpanded = !isExpanded"
       >
-      <i :class="['fa', `fa-caret-${isExpanded ? 'up': 'down'}`, { 'hovering': hovering }]" aria-hidden="true"></i>
+      <i :class="['iconfont', `icon-caret-${isExpanded ? 'up': 'down'}`, { 'hovering': hovering }]" aria-hidden="true"></i>
       <span :class="{ 'hovering': hovering }">{{ controlText }}</span>
     </div>
 
@@ -118,7 +118,7 @@ export default {
       font-size: 14PX;
       transition: .3s;
       &.hovering {
-        transform: translateX(-333%);
+        transform: translateX(-222%);
       }
     }
 

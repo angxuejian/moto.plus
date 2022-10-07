@@ -44,9 +44,9 @@ module.exports = function(source) {
     } 
     // ```html
     else if (type === fenceHtmlName) {
-      const { css, component } = renderComponent(content, index)
+      const { css, component } = renderComponent(content, start)
       componentSty += css
-      joinComponent(`${demoComponentName}${index}`, component)
+      joinComponent(`${demoComponentName}${start}`, component)
     }
     
     index = end + endTagLength
@@ -55,7 +55,6 @@ module.exports = function(source) {
   }
 
   templateArray.push(html.slice(index)) // 最后一个:moto-demo--> 之后的数据
-
   return `
     <template>
       <div v-highlight class='docs-wrapper'> ${templateArray.join('')} </div>
@@ -70,7 +69,7 @@ module.exports = function(source) {
         Fragment as _Fragment, openBlock as _openBlock, 
         createElementBlock as _createElementBlock,
         createTextVNode as _createTextVNode,
-        pushScopeId as _pushScopeId, popScopeId as _popScopeId 
+        pushScopeId as _pushScopeId, popScopeId as _popScopeId
         } from 'vue'
 
       export default {

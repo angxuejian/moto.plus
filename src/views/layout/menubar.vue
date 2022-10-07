@@ -1,13 +1,13 @@
 <template>
   <div class="menubar">
 
-    <div @click="openSide" class="menu"></div>
+    <i @click="openSide" class="iconfont icon-icon_menu_open menu" />
+
     <div></div>
   </div>
 </template>
 
 <script>
-// import { ref } from 'vue'
 import { useStore } from 'vuex'
 export default {
   setup() {
@@ -35,11 +35,8 @@ export default {
   display: none;
   z-index: var(--men-z-index);
   .menu {
-    width: 23PX;
-    height: 23PX;
+    font-size: 20PX;
     display: block;
-    background: var(--mo-menu) no-repeat;
-    background-size: 100% 100%;
     cursor: pointer;
   }
 }

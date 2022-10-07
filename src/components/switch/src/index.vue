@@ -1,5 +1,5 @@
 <template>
-  <div class="mo-switch">
+  <div>
     <div 
     @click="switchStatus"
     :class="{
@@ -10,10 +10,10 @@
     }
     ">
       <div v-if="theme" class="pointer">
-        <img v-show="!checked" src="@/assets/light.png" alt="">
-        <img v-show="checked" src="@/assets/dark.png" alt="">
+        <i :class="['iconfont', `icon-${checked ? 'moon' : 'sun'}`]" />
       </div>
     </div>
+
   </div>
 </template>
 
@@ -111,10 +111,6 @@ $color: var(--mo-text-light-color);
     justify-content: center;
     background-color: var(--mo-bg-color);
     @extend %pointer;
-    > img {
-      width: 100%;
-      height: 100%;
-    }
   }
 }
 .switch__checked {

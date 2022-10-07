@@ -1,17 +1,30 @@
 # switch
 
-123456---?000000000
+123456---?00000000000000000000
 ::: demo 12test100000000000
 ```html
 
-<div class='number'>123</div>
-<span></span>
+<div>
+  456
+  <span @click='clickMe'>123</span>
+</div>
 
+<script>
+  export default {
+    methods: {
+      clickMe: function () {
+        alert('456')
+      }
+    }
+  }
+</script>
 
 <style> 
 div {
-  background: red;
-  color: #fff
+  color: blue
+}
+span {
+  color: red;
 }
 </style>
 ```

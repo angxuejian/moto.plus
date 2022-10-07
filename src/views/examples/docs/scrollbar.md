@@ -1,5 +1,5 @@
 # Scrollbar | 自定义滚动条
-我么不这不一定？！0
+我么不这不一定？！000000
 # 0xxxxz
 
 ::: demo 文章包括各种文体的著作、作品，如诗歌、戏剧、小说、科学论文`记叙文`、
@@ -10,10 +10,8 @@
 
 <style>
   .test {
-    background: blue;
-    color: #fff;
-    width: 100px;
-    height: 100px;
+    color: red;
+    cursor: pointer;
   }
 </style>
 ```

@@ -90,13 +90,12 @@ function getRenderCode(code, descriptor) {
   const targetLength = target.length
   const index = code.indexOf(target)
   let render = code.slice(index + targetLength).replace(/export/g, '')
+  // return render
   return rewriteRenderCode(render, descriptor)
 }
 
 /**
  * 重写 render函数
- * _withScopeId只出现1次 => 单个标签的 scopeId没有加载成功
- *  嵌套多层标签 => 最外层div无法添加scopeId
  * @param {string} code render组件字符串
  * @param {object} descriptor 源码的ast树，获取最外层标签
  * @returns 
@@ -104,23 +103,23 @@ function getRenderCode(code, descriptor) {
 function rewriteRenderCode(code, descriptor) {
   let render = code
 
-  const scoped = render.match(/_withScopeId/g)
-  const hoisted = render.match(/const _hoisted_1 = {.*}/g)
+  const scoped = /_withScopeId/
+  const hoisted = render.match(/const _hoisted_1 = (.*)[\*\)\)|\}]/)
 
-  // 先查找 _hoisted_1 所在行
-  if (hoisted) {
-    const m = hoisted[0].match(scoped)
-    // 查找 _withScopeId 是否存在，不存在证明没有添加成功 scopeId => 重新 render函数
-    if (!m) {
-      const tag = descriptor.customBlocks[0]
-      const renderStr = /_openBlock\(\),(.*)\)/
-
-      const _hoisted_end = render.match(/_createElementBlock\("div", _hoisted_1, (.*)\)\)/)[1]
-      const _hoisted_start = `_openBlock(), _createElementBlock(_Fragment, null, [
-        _withScopeId(() => _createElementVNode("${tag.type}", _hoisted_1, ${_hoisted_end})) 
-      ]))`
-      render = render.replace(renderStr, _hoisted_start)
+  // 重写 _hoisted_1不存在_withScopeId方法 和 全部不存在_withScopeId方法
+  if ((hoisted && !scoped.test(hoisted[0])) || !scoped.test(render)) {
+    const tag = descriptor.customBlocks[0]
+    const renderStr = /_openBlock\(\),([\S\s]+)\)/
+    const params = render.match(/_createElementBlock\("div", ([\S\s]+), ([\S\s]+)\)\)/)
+    let withScopeId = ''
+    
+    if (!scoped.test(render)) {
+      withScopeId = `const _withScopeId = n => (_pushScopeId("data-v-${descriptor.id}"),n=n(),_popScopeId(),n)\n`
     }
+    const _hoisted_start = `_openBlock(), _createElementBlock(_Fragment, null, [
+      _withScopeId(() => _createElementVNode("${tag.type}", ${params[1]}, ${params[2]})) 
+    ]))`
+    render = withScopeId + render.replace(renderStr, _hoisted_start)
   }
   return render
 }
