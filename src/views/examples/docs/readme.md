@@ -1,6 +1,6 @@
 # Markdown 扩展
 
-## 自定义容器0
+## 自定义容器
 ::: tip
 这是一个提示
 :::
@@ -9,7 +9,7 @@
 这是一个警告
 :::
 
-::: demo 这是demo/html语法容器
+::: demo 这是demo/html语法容器，**最外层只支持一个父标签样式**
 ```html
 <div @click='clickMe'> click me </div>
 

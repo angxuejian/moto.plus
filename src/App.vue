@@ -3,8 +3,8 @@
     <div class="navbar">
       <div class="navbar-wrapper">
         
-        <a class="logo" href="#" alt='Moto Plus Logo'>
-          <div></div><span>Moto Plus</span>
+        <a class="logo" href="#" :alt='`${title} Logo`'>
+          <div></div><span>{{ title }}</span>
         </a>
        
         <div class="header-wrapper">
@@ -35,6 +35,7 @@
 <script>
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
+const setting = require('./setting')
 export default {
   name: 'APP',
   
@@ -47,8 +48,10 @@ export default {
     const selectSubPageIndex = computed(() => store.state.path === '/' ? 0 : 1)
     const getSubPage = index => { selectSubPageIndex.value = index }
     const onCallbackSwitchChange = () => { store.dispatch('CHANGE_THEME') }
+
+    const title = setting.title
     
-    return { subPages, selectSubPageIndex, getSubPage, onCallbackSwitchChange }
+    return { title, subPages, selectSubPageIndex, getSubPage, onCallbackSwitchChange }
   },
 }
 </script>

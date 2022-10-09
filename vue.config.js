@@ -1,9 +1,9 @@
 const path = require('path');
-
+const setting = require('./src/setting')
 module.exports = {
   pages: {
     index: {
-      title: 'Moto Plus',
+      title: setting.title,
       entry: 'src/main.js',
       template: 'public/index.html',
       filename: 'index.html',
