@@ -1,4 +1,4 @@
-# Markdown 扩展
+# Markdown 扩展0
 
 ## 自定义容器
 ::: tip
@@ -11,7 +11,7 @@
 
 ::: demo 这是demo/html语法容器，**最外层只支持一个父标签样式**
 ```html
-<div @click='clickMe'> click me </div>
+<span @click='clickMe'> click me </span>
 
 <script>
   export default {
@@ -24,7 +24,7 @@
 </script>
 
 <style>
-  div {
+  span {
     color: #438EDB;
     cursor: pointer;
   }

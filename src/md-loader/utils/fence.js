@@ -1,4 +1,4 @@
-const { fenceCompName, fenceHtmlName, reg, regTag, replaceSpace, readComponent } = require('./util')
+const { fenceCompName, fenceHtmlName, fenctVueName, reg, regTag, replaceSpace, readComponent } = require('./util')
 
 const slotCode = content => {
   return `
@@ -20,8 +20,10 @@ module.exports = function(md) {
     const prevToken = tokens[idx - 1]
     const m = prevToken.info.trim().match(reg)
     const isInDemoBlock = prevToken && prevToken.nesting === 1 && m
-    const isInFenceComp = replaceSpace(token.info) === fenceCompName
-    const isInFenceHtml = replaceSpace(token.info) === fenceHtmlName
+
+    const name = replaceSpace(token.info)
+    const isInFenceComp = name === fenceCompName
+    const isInFenceHtml = name === fenceHtmlName || name === fenctVueName
 
     // 是否在 :::demo 和 ```component 中存在，即增加代码高亮样式
     if (isInDemoBlock && isInFenceComp) {

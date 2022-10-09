@@ -6,6 +6,7 @@ const fs = require('fs')
 const blockName = 'demo' // :::demo  增加自定义示例块的容器名称(标识)
 const fenceCompName = 'component' // ```component 增加自定义代码块的容器名称(标识)
 const fenceHtmlName = 'html'      // ```html
+const fenctVueName  = 'vue'       // ```vue 与html相同
 
 const reg = new RegExp(`^${blockName}\s*(.*)$`) // ::: demo => true or false
 const regTag = /<(\S*)\s+\/>/  // <test />  or  <scrollbar/test />   => test or scrollbar/test  拼成目录地址
@@ -61,7 +62,7 @@ const renderComponent = (source, id) => {
 }
 
 module.exports = {
-  blockName, fenceCompName, fenceHtmlName,
+  blockName, fenceCompName, fenceHtmlName, fenctVueName,
   reg, regTag, regType,
   getFenceType,
   replaceSpace, readComponent,
@@ -110,7 +111,8 @@ function rewriteRenderCode(code, descriptor) {
   if ((hoisted && !scoped.test(hoisted[0])) || !scoped.test(render)) {
     const tag = descriptor.customBlocks[0]
     const renderStr = /_openBlock\(\),([\S\s]+)\)/
-    const params = render.match(/_createElementBlock\("div", ([\S\s]+), ([\S\s]+)\)\)/)
+    const parReg = new RegExp(`_createElementBlock\\("${tag.type}", ([\\S\\s]+), ([\\S\\s]+)\\)\\)`) // 需要多一层 \ 转义
+    const params = render.match(parReg)
     let withScopeId = ''
     
     if (!scoped.test(render)) {

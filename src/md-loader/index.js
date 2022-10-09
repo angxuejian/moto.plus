@@ -1,7 +1,7 @@
 const md = require('./utils/config')
 const { 
   regTag, regType, 
-  fenceCompName, fenceHtmlName,
+  fenceCompName, fenceHtmlName, fenctVueName,
   getFenceType, 
   importComponent, renderComponent,
 } = require('./utils/util')
@@ -43,7 +43,7 @@ module.exports = function(source) {
       if (path) joinComponent(path[1].split('/').pop(), importComponent(path[1]))
     } 
     // ```html
-    else if (type === fenceHtmlName) {
+    else if (type === fenceHtmlName || type === fenctVueName) {
       const { css, component } = renderComponent(content, start)
       componentSty += css
       joinComponent(`${demoComponentName}${start}`, component)
