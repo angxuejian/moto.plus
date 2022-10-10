@@ -109,7 +109,7 @@ function rewriteRenderCode(code, descriptor) {
 
   // 重写 _hoisted_1不存在_withScopeId方法 和 全部不存在_withScopeId方法
   if ((hoisted && !scoped.test(hoisted[0])) || !scoped.test(render)) {
-    const tag = descriptor.customBlocks[0]
+    const tag = descriptor.customBlocks[0] || descriptor.template
     const renderStr = /_openBlock\(\),([\S\s]+)\)/
     const parReg = new RegExp(`_createElementBlock\\("${tag.type}", ([\\S\\s]+), ([\\S\\s]+)\\)\\)`) // 需要多一层 \ 转义
     const params = render.match(parReg)

@@ -1,4 +1,4 @@
-# Markdown 扩展0
+# Markdown 扩展
 
 ## 自定义容器
 ::: tip
@@ -9,7 +9,7 @@
 这是一个警告
 :::
 
-::: demo 这是demo/html语法容器，**最外层只支持一个父标签样式**
+::: demo 这是demo/html语法容器，**最外层只支持一个父标签样式, 并且不支持template标签**
 ```html
 <span @click='clickMe'> click me </span>
 
@@ -37,6 +37,10 @@
 ``` component
 <readme/index />
 ```
+:::
+
+:::warning
+使用**html**代码块```加载<script>与<style>标签时```，编译代码会提出警告```Tags with side effect (<script> and <style>) are ignored in client component templates``` ，而使用 **component**代码块，将没有任何问题
 :::
 
 ## 表格
