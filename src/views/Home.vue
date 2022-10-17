@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { inject, ref, onMounted, onBeforeUnmount  } from 'vue'
 export default {
   name: 'Home',
 
@@ -64,6 +64,7 @@ export default {
   
 
     onMounted(() => {
+      inject('$previewImage')()
       window.addEventListener('scroll', scrollHander)
 
       const key = 'part2DOMOffsetTop'

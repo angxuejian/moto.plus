@@ -3,7 +3,9 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import components from './register/components';
+import composables from './register/composables';
 import './package';
 
+const app = createApp(App)
 
-createApp(App).use(store).use(router).use(components).mount('#app');
+app.use(store).use(router).use(components).use(composables).mount('#app')
