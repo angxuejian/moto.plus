@@ -1,5 +1,28 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
+import Navbar from './navbar.json'
+
+const formatComponentRouter = () => {
+  const router = []
+  const setData = (item) => {
+    return {
+      path: `/component/${item.url}`,
+      name: item.url[0].toUpperCase() + item.url.substr(1),
+      component: () => import('@/views/examples/docs/' + item.url + '.md'),
+    }
+  }
+  Navbar.forEach(item => {
+    if (item.children) {
+      item.children.forEach(child => {
+        router.push(setData(child))
+      })
+    } else {
+      router.push(setData(item))
+    }
+  })
+  return router
+}
+
 
 const routes = [
   {
@@ -12,28 +35,7 @@ const routes = [
     name: 'Component',
     redirect: '/component/scrollbar',
     component: () => import('@/views/layout'),
-    children: [
-      {
-        path: '/component/scrollbar',
-        name: 'Scrollbar',
-        component: () => import('@/views/examples/docs/scrollbar.md'),
-      },
-      {
-        path: '/component/switch',
-        name: 'Switch',
-        component: () => import('@/views/examples/docs/switch.md'),
-      },
-      {
-        path: '/component/previewImage',
-        name: 'PreviewImage',
-        component: () => import('@/views/examples/docs/previewImage.md'),
-      },
-      {
-        path: '/component/readme',
-        name: 'Readme',
-        component: () => import('@/views/examples/docs/readme.md'),
-      },
-    ],
+    children: formatComponentRouter(),
   },
 ];
 

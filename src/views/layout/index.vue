@@ -40,7 +40,6 @@ export default {
   width: 100%;
   box-sizing: border-box;
   padding-left: calc(var(--sidebar-width) + 3%);
-  background-color: var(--mo-color);
   display: flex;
   align-items: flex-start;
   .view-wrapper {

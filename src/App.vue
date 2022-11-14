@@ -60,20 +60,25 @@ export default {
 #nprogress .bar {
   background: var(--primary-color) !important;
 }
-html, body, #app {
+html, body {
   width: 100%;
   height: 100%;
+}
+html, body, #app {
   padding: 0;
   margin: 0;
 }
 body {
-  color: var(--mo-text-regular-color);
-  background-color: var(--mo-bg-light-color);
   -webkit-tap-highlight-color: transparent
 }
+
 #app {
+  background-color: var(--mo-color);
+  color: var(--mo-text-regular-color);
   box-sizing: border-box;
   transition: background-color 0.3s;
+  min-height: 100%;
+  min-width: 100%;
 }
 .navbar {
   width: 100%;

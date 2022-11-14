@@ -27,6 +27,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import Navbar from '@/router/navbar.json'
 export default {
   
   setup() {
@@ -34,24 +35,7 @@ export default {
 
     const router = useRouter()
     const store = useStore()
-    const sidebarArr = ref([
-      { title: 'Basic 基础组件',
-        children: [
-          { name: 'Scrollbar 滚动条', url: 'scrollbar' },
-          { name: 'Switch 开关', url: 'switch'},
-        ],
-      },
-      {
-        title: 'Popup 弹窗组件',
-        children: [
-          { name: 'PreviewImage 预览图片', url: 'previewImage' },
-        ],
-      },
-      {
-        title: 'Markdown 扩展',
-        url: 'readme',
-      },
-    ])
+    const sidebarArr = ref(Navbar)
     const sidebarIndex = computed(() => store.state.path)
     const hasSide = computed(() => store.state.hasSide)
     const close = () => { store.dispatch('CHANGE_SIDE', false) }

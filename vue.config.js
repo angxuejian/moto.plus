@@ -31,7 +31,7 @@ module.exports = {
           type: 'javascript/auto',
         },
         {
-          test: /docs\\.*.md$/, // 只渲染 examples\docs\目录下的 .md文件
+          test: setting.regMLoader,
           use: [
             { loader: 'vue-loader', options: { compilerOptions: { preserveWhitespace: false } } },
             { loader: path.resolve(__dirname, './src/md-loader/index.js') },

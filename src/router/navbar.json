@@ -1,0 +1,19 @@
+[
+  { 
+    "title": "Basic 基础组件",
+    "children": [
+      { "name": "Scrollbar 滚动条", "url": "scrollbar" },
+      { "name": "Switch 开关", "url": "switch"}
+    ]
+  },
+  {
+    "title": "Popup 弹窗组件",
+    "children": [
+      { "name": "PreviewImage 预览图片", "url": "previewImage" }
+    ]
+  },
+  {
+    "title": "Markdown 扩展",
+    "url": "readme"
+  }
+]

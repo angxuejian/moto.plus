@@ -105,7 +105,9 @@ $top: calc(var(--navbar-height) + 1PX);
     width: 100%;
   }
 }
-
+.home {
+  background-color: var(--mo-bg-light-color);
+}
 #part1 {
   width: 50%;
   height: 500PX;
