@@ -97,7 +97,7 @@ export default {
     border-top: solid 1PX var(--mo-demo-border);
     height: 44PX;
     box-sizing: border-box;
-    background-color: var(--mo-bg-color);
+    background-color: var(--mo-color);
     border-bottom-left-radius: 4PX;
     border-bottom-right-radius: 4PX;
     display: flex;

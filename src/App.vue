@@ -68,16 +68,16 @@ html, body, #app {
 }
 body {
   color: var(--mo-text-regular-color);
+  background-color: var(--mo-bg-light-color);
   -webkit-tap-highlight-color: transparent
 }
 #app {
-  background-color: var(--mo-bg-color);
   box-sizing: border-box;
   transition: background-color 0.3s;
 }
 .navbar {
   width: 100%;
-  background-color: var(--mo-bg-color);
+  background-color: var(--mo-color);
   border-bottom: 1px solid var(--mo-text-hover-color);
   position: sticky;
   top: 0;

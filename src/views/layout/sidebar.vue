@@ -42,6 +42,12 @@ export default {
         ],
       },
       {
+        title: 'Popup 弹窗组件',
+        children: [
+          { name: 'PreviewImage 预览图片', url: 'previewImage' },
+        ],
+      },
+      {
         title: 'Markdown 扩展',
         url: 'readme',
       },
@@ -77,7 +83,7 @@ export default {
   width: 27%;
   z-index: var(--sid-z-index);
   top: calc(var(--navbar-height) + 1PX);
-  background-color: var(--mo-bg-color);
+  background-color: var(--mo-color);
   height: calc(100% - var(--navbar-height) + 1PX);
   color: var(--mo-text-primary-color);
   transform: translateX(0);

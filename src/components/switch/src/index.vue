@@ -109,7 +109,7 @@ $color: var(--mo-text-light-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--mo-bg-color);
+    background-color: var(--mo-color);
     @extend %pointer;
   }
 }

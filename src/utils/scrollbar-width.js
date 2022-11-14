@@ -13,7 +13,7 @@ export default function() {
   outer.appendChild(inner)
   document.body.appendChild(outer)
 
-  scrollbarWidth = inner.offsetWidth - outer.offsetWidth
+  scrollbarWidth = inner.offsetWidth - outer.offsetWidth - 2
 
   outer.parentNode.removeChild(outer)
 

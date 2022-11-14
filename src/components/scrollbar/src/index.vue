@@ -79,7 +79,7 @@ export default {
 
 <style lang="scss" scoped>
 $hover-bar: var(--mo-text-hover-color);
-$hover-bc: var(--mo-bg-hover-color);
+$hover-bc: var(--mo-hover-color);
 %axis-bar {
   border-radius: 15px;
   transition: background-color 0.3s;

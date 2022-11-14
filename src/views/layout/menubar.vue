@@ -27,7 +27,7 @@ export default {
   box-sizing: border-box;
   width: 100%;
   height: 48PX;
-  background-color: var(--mo-bg-color);
+  background-color: var(--mo-color);
   border-bottom: 1px solid var(--mo-text-hover-color);
   display: flex;
   align-items: center;

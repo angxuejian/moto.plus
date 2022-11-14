@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { inject, ref, onMounted, onBeforeUnmount  } from 'vue'
+import { ref, onMounted, onBeforeUnmount  } from 'vue'
 export default {
   name: 'Home',
 
@@ -64,7 +64,6 @@ export default {
   
 
     onMounted(() => {
-      inject('$previewImage')()
       window.addEventListener('scroll', scrollHander)
 
       const key = 'part2DOMOffsetTop'
@@ -105,10 +104,6 @@ $top: calc(var(--navbar-height) + 1PX);
   img {
     width: 100%;
   }
-}
-
-.home {
-  background-color: #f5f5f5;
 }
 
 #part1 {
