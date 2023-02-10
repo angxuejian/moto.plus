@@ -3,5 +3,8 @@
 module.exports = {
   title: 'Moto Plus',
   
-  regMLoader: /docs\\.*.md$/, // md-loader只会渲染 examples\docs\目录下的 .md文件
+  github: {
+    href: 'https://github.com/angxuejian/moto.plus',
+    alt: 'angxuejian/moto.plus',
+  },
 }

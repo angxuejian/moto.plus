@@ -1,4 +1,4 @@
-import ClickOutside from '../../src/directive/click-outside'
+import ClickOutside from '../../src/directives/click-outside'
 import { triggerClick } from '../utils'
 const ctx = '@@clickoutsideContext'
 

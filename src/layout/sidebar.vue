@@ -7,14 +7,14 @@
 
           <template v-if="item.children">
             <p class="sidebar-item__title">{{ item.title }}</p>
-            <router-link v-for="(s, i) in item.children" :key="i" :to="pathUrl(s.url)">
-              <span :class="['sidebar-item__link', { 'sidebar-item__selected': sidebarIndex === pathUrl(s.url) }]">{{ s.name }}</span>
+            <router-link v-for="(s, i) in item.children" :key="i" :to="pathUrl(s)">
+              <span :class="['sidebar-item__link', { 'sidebar-item__selected': sidebarIndex === pathUrl(s) }]">{{ s.name }}</span>
             </router-link>
           </template>
 
           <template v-else>
-            <router-link :to="pathUrl(item.url)">
-              <span :class="['sidebar-item__title', { 'sidebar-item__title-selected': sidebarIndex === pathUrl(item.url) }]">{{ item.title }}</span>
+            <router-link :to="pathUrl(item)">
+              <span :class="['sidebar-item__title', { 'sidebar-item__title-selected': sidebarIndex === pathUrl(item) }]">{{ item.title }}</span>
             </router-link>
           </template>
         </div>
@@ -27,15 +27,15 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import Navbar from '@/router/navbar.json'
+import pages from '@/router/pages.js'
 export default {
   
   setup() {
-    const pathUrl = url => `/component/${url}`
+    const pathUrl = item => `/component/${item.name}`
 
     const router = useRouter()
     const store = useStore()
-    const sidebarArr = ref(Navbar)
+    const sidebarArr = ref(pages)
     const sidebarIndex = computed(() => store.state.path)
     const hasSide = computed(() => store.state.hasSide)
     const close = () => { store.dispatch('CHANGE_SIDE', false) }
@@ -46,7 +46,7 @@ export default {
     
     const routerlink = item => {
       if (item.children) return
-      router.push({ path: pathUrl(item.url) })
+      router.push({ path: pathUrl(item) })
     }
 
     return { sidebarArr, sidebarIndex, hasSide, pathUrl, close, routerlink }

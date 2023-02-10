@@ -1,47 +1,49 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
-import Navbar from './navbar.json'
+import pages from './pages'
 
-const formatComponentRouter = () => {
+const formatRouter = () => {
   const router = []
   const setData = (item) => {
     return {
-      path: `/component/${item.url}`,
-      name: item.url[0].toUpperCase() + item.url.substr(1),
-      component: () => import('@/views/examples/docs/' + item.url + '.md'),
+      path: `/component/${item.name}`,
+      component: item.path,
     }
   }
-  Navbar.forEach(item => {
+  pages.forEach(item => {
     if (item.children) {
       item.children.forEach(child => {
-        router.push(setData(child))
+        !child.link && router.push(setData(child))
       })
     } else {
-      router.push(setData(item))
+      !item.link && router.push(setData(item))
     }
   })
   return router
 }
 
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-  },
-  {
-    path: '/component',
-    name: 'Component',
-    redirect: '/component/scrollbar',
-    component: () => import('@/views/layout'),
-    children: formatComponentRouter(),
-  },
-];
-
+const routes = formatRouter()
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes,
+  routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: Home,
+    },
+    {
+      path: '/component',
+      redirect: routes[0].path,
+      component: () => import('@/layout'),
+      children: routes,
+    },
+    {
+      // 404
+      path: '/:pathMatch(.*)*',
+      redirect: routes[0].path,
+    },
+  ],
 });
 
 export default router;
