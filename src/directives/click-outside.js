@@ -4,22 +4,29 @@ const ctx = '@@clickoutsideContext'
 
 let seed = 0
 
-document.addEventListener('click', listenerClick)
+window.addEventListener('click', listenerClick)
 
-function listenerClick(event) { nodelist.forEach(node => node[ctx].elHandler(event)) }
-
-function createElHandler(el, binding, vnode) {
+function listenerClick(event) { 
+  nodelist.forEach(node => node[ctx].elHandler(event))
+}
+function createElHandler(el) {
   return function(click = {}) {
-    if (!vnode || !vnode.context || !click || !click.target || (el && el.contains(click.target))) return
-
-    if (binding.expression && el[ctx].vCallbackName && vnode.context[el[ctx].vCallbackName]) {
-      vnode.context[el[ctx].vCallbackName]()
-    } else {
-      el[ctx].vCallback && el[ctx].vCallback()
-    }
+    if (!click || !click.target || (el && el.contains(click.target))) return
+    el[ctx].vCallback && el[ctx].vCallback()
   }
 }
 
+/**
+ * import clickoutside from './click-outside'
+ * directives: { clickoutside }
+ * 
+ * v-clickoutside
+ * @desc 点击元素外面才会触发的事件
+ * @example
+ * ```vue
+ * <div v-clickoutside="handleClose">
+ * ```
+ */
 export default {
   created(el, binding, vnode) {
     nodelist.push(el)
@@ -28,14 +35,12 @@ export default {
     el[ctx] = {
       id,
       vCallback: binding?.value,
-      vCallbackName: binding?.expression,
       elHandler: createElHandler(el, binding, vnode),
     }
   },
 
   updated(el, binding, vnode) {
     el[ctx].vCallback = binding?.value
-    el[ctx].vCallbackName = binding?.expression
     el[ctx].elHandler = createElHandler(el, binding, vnode)
   },
 
@@ -47,6 +52,7 @@ export default {
       }
     }
     delete el[ctx]
-    // window.removeEventListener('click', listenerClick)
+
+    if (!nodelist.length) window.removeEventListener('click', listenerClick)
   },
 }
