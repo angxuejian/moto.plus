@@ -27,13 +27,7 @@
       </div>
     </div>
     <div class="main">
-      <div v-if="!isShow" class="test" v-clickoutside='onCallbackClose'>test23</div>
-
-      <div v-if="!isShow1" class="test" v-clickoutside='onCallbackClose1'>test23</div>
-      <div v-if="!isShow2" class="test" v-clickoutside='onCallbackClose2'>test23</div>
-
-
-      <!-- <router-view /> -->
+      <router-view />
     </div>
   </div>
 </template>
@@ -41,12 +35,9 @@
 <script>
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
-// import ripple from '@/directives/ripple'
-import clickoutside from '@/directives/click-outside'
 const setting = require('./setting')
 export default {
   name: 'APP',
-  directives: { clickoutside },
   setup() {
     const store = useStore()
     const subPages = ref([
@@ -57,29 +48,10 @@ export default {
     const getSubPage = index => { selectSubPageIndex.value = index }
     const onCallbackSwitchChange = () => { store.dispatch('CHANGE_THEME') }
 
-    const isShow = ref(false)
-    const isShow1 = ref(false)
-    const isShow2 = ref(false)
-
     const title = setting.title
     const github = setting.github
-    const onCallbackClose = () => {
-      console.log('----?>')
-      isShow.value = true
-    }
-    const onCallbackClose1 = () => {
-      console.log('----?>1')
-      // if (isShow.value) {
-      //   isShow1.value = true
-      // }
-    }
-    const onCallbackClose2 = () => {
-      console.log('----?>2')
-      // if (isShow.value && isShow1.value) {
-      //   isShow2.value = true
-      // }
-    }
-    return { isShow, isShow1, isShow2, onCallbackClose, onCallbackClose1, onCallbackClose2, github, title, subPages, selectSubPageIndex, getSubPage, onCallbackSwitchChange }
+
+    return { github, title, subPages, selectSubPageIndex, getSubPage, onCallbackSwitchChange }
   },
 }
 </script>

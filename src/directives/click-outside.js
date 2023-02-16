@@ -4,11 +4,6 @@ const ctx = '@@clickoutsideContext'
 
 let seed = 0
 
-window.addEventListener('click', listenerClick)
-
-function listenerClick(event) { 
-  nodelist.forEach(node => node[ctx].elHandler(event))
-}
 function createElHandler(el) {
   return function(click = {}) {
     if (!click || !click.target || (el && el.contains(click.target))) return
@@ -28,20 +23,22 @@ function createElHandler(el) {
  * ```
  */
 export default {
-  created(el, binding, vnode) {
+  created(el, binding) {
     nodelist.push(el)
     const id = seed++
 
     el[ctx] = {
       id,
       vCallback: binding?.value,
-      elHandler: createElHandler(el, binding, vnode),
+      elHandler: createElHandler(el, binding),
+      listenerClick: (event) => { nodelist.forEach(node => node[ctx].elHandler(event)) }
     }
+    document.addEventListener('click', el[ctx].listenerClick)
   },
 
-  updated(el, binding, vnode) {
+  updated(el, binding) {
     el[ctx].vCallback = binding?.value
-    el[ctx].elHandler = createElHandler(el, binding, vnode)
+    el[ctx].elHandler = createElHandler(el, binding)
   },
 
   unmounted(el) {
@@ -51,8 +48,7 @@ export default {
         break
       }
     }
+    document.removeEventListener('click', el[ctx].listenerClick)
     delete el[ctx]
-
-    if (!nodelist.length) window.removeEventListener('click', listenerClick)
   },
 }
