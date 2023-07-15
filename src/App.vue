@@ -57,16 +57,6 @@ export default {
 </script>
 
 <style lang="scss">
-.test {
-  width: 100px;
-  height: 50px;
-  margin: 20px;
-  // position: fixed;
-  top: 300px;
-  left: 500px;
-  background-color: burlywood;
-  cursor: pointer;
-}
 #nprogress .bar {
   background: var(--primary-color) !important;
 }

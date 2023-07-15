@@ -1,6 +1,9 @@
 <template>
   <div class="home">
+
+    <!-- <div v-ripple class="test1">  </div> -->
     
+    <!-- <div style="width: 100px;" v-ripple class="test2"> </div> -->
     <div class="scroll-div" />
 
     <div id="part1">
@@ -23,9 +26,10 @@
 
 <script>
 import { ref, onMounted, onBeforeUnmount  } from 'vue'
+import ripple from '@/directives/ripple'
 export default {
   name: 'Home',
-
+  directives: { ripple },
   setup() {
     const djNum = ref('1')
     const appleNum = ref('00')
@@ -105,9 +109,35 @@ $top: calc(var(--navbar-height) + 1PX);
     width: 100%;
   }
 }
-.home {
-  background-color: var(--mo-bg-light-color);
+
+.test1 {
+  width: 150PX;
+  height: 150PX;
+  background-color: #ededed;
+  // border-radius: 10px;
+  text-align: center;
+  line-height: 50PX;
+  color: #333;
+  font-size: 20px;
+  border-radius: 50%;
+  // position: fixed;
+  // left: 100px;
+  // top: 100px;
 }
+.test2 {
+  margin-top: 20PX;
+  width: 300PX;
+  height: 200PX;
+  background-color: #ededed;
+  // border-radius: 10px;
+  text-align: center;
+  line-height: 200PX;
+  color: #333;
+  font-size: 20px;
+}
+// .home {
+//   // background-color: var(--mo-bg-light-color);
+// }
 #part1 {
   width: 50%;
   height: 500PX;

@@ -31,7 +31,7 @@ export default {
       id,
       vCallback: binding?.value,
       elHandler: createElHandler(el, binding),
-      listenerClick: (event) => { nodelist.forEach(node => node[ctx].elHandler(event)) }
+      listenerClick: (event) => { nodelist.forEach(node => node[ctx].elHandler(event)) },
     }
     document.addEventListener('click', el[ctx].listenerClick)
   },
